@@ -1,0 +1,7 @@
+{
+  "name": "Myanmar Health Transition & Reversal Analysis",
+  "description": "Interactive data mining dashboard analyzing WHO health indicator trajectories, reversals, clustering, anomaly surveillance, and deterioration risk forecasting in Myanmar (1961–2030).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
