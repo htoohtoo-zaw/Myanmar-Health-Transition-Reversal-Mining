@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Home,
   Database,
+  Table2,
   TrendingDown,
   GitFork,
   Layers,
@@ -54,6 +55,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   const mainItems: NavItem[] = [
     { id: 'overview', label: 'Executive Overview', icon: Home },
     { id: 'data-quality', label: 'Dataset & 4 Traps', icon: Database },
+    { id: 'raw-data', label: 'Raw Data Explorer', icon: Table2 },
   ];
 
   const descriptiveItems: NavItem[] = [
@@ -220,6 +222,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   const pageTitles: Record<NavigationPage, { section: string; title: string }> = {
     overview: { section: 'Executive Overview', title: 'Health Transition & Reversal Summary' },
     'data-quality': { section: 'Data Understanding & Prep', title: 'Dataset Profile & Four Quality Traps' },
+    'raw-data': { section: 'Data Understanding & Prep', title: 'Raw WHO GHO Observation Explorer' },
     reversal: { section: 'Descriptive Mining', title: 'Reversal Detection & Years Lost' },
     clustering: { section: 'Descriptive Mining', title: 'Trajectory Clustering (DTW + Ward)' },
     'disease-levels': { section: 'Descriptive Mining', title: 'Disease Burden Discretisation (Low/Mid/High)' },
@@ -273,6 +276,7 @@ export const TopBar: React.FC<TopBarProps> = ({
           >
             <option value="overview">1. Overview</option>
             <option value="data-quality">2. Dataset & 4 Traps</option>
+            <option value="raw-data">2b. Raw Data Explorer</option>
             <option value="reversal">3. Reversal Detection</option>
             <option value="clustering">4. Trajectory Clustering</option>
             <option value="disease-levels">5. Disease Discretisation</option>
