@@ -24,6 +24,17 @@ export interface DataDownload {
 
 export const DATA_DOWNLOADS: DataDownload[] = [
   {
+    id: 'gho-raw',
+    label: 'WHO GHO Myanmar export (raw)',
+    description:
+      'The unmodified source export every figure on this site derives from: all 644 indicators across 1961–2030, one row per indicator-year-dimension observation. Includes the original GHO code, indicator URL, disaggregation dimensions, and the raw Value/Low/High fields prior to any cleansing.',
+    path: '/data/who-gho-myanmar-raw.csv',
+    format: 'CSV',
+    size: '6.5 MB',
+    rows: '20,613',
+    stage: 'raw',
+  },
+  {
     id: 'tables-json',
     label: 'All analysis tables (combined)',
     description:
@@ -113,4 +124,4 @@ export const DATA_DOWNLOADS: DataDownload[] = [
 ];
 
 export const DATA_PROVENANCE =
-  'Derived from the World Health Organization Global Health Observatory (GHO), Myanmar country profile. The files above are the prepared analysis tables generated from the cleansed dataset — regenerate them with `npm run build:data`. The full raw GHO export is not yet published here.';
+  'World Health Organization — Global Health Observatory (GHO), Myanmar country profile. The raw export is redistributed unmodified; the prepared tables are generated from it via the cleansing and mining pipeline described on this page, and are rebuilt with `npm run build:data`.';
