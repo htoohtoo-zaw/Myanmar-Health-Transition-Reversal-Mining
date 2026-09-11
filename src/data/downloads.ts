@@ -22,7 +22,95 @@ export interface DataDownload {
   stage: 'raw' | 'prepared';
 }
 
-export const DATA_DOWNLOADS: DataDownload[] = [];
+export const DATA_DOWNLOADS: DataDownload[] = [
+  {
+    id: 'tables-json',
+    label: 'All analysis tables (combined)',
+    description:
+      'Every prepared table behind the site in one JSON document, plus the headline dataset statistics. Best starting point for programmatic re-analysis.',
+    path: '/data/myanmar-health-mining-tables.json',
+    format: 'JSON',
+    size: '45.8 KB',
+    stage: 'prepared',
+  },
+  {
+    id: 'trained-indicators',
+    label: 'Trained indicator records',
+    description:
+      'Indicator-level records used to fit the reversal classifier, with domain, unit, and engineered series features.',
+    path: '/data/trained-indicators.csv',
+    format: 'CSV',
+    size: '3.5 KB',
+    rows: '14',
+    stage: 'prepared',
+  },
+  {
+    id: 'reversal-items',
+    label: 'Reversal findings',
+    description:
+      'Detected health-transition reversals with direction, magnitude, and supporting evidence.',
+    path: '/data/reversal-items.csv',
+    format: 'CSV',
+    size: '4.8 KB',
+    rows: '14',
+    stage: 'prepared',
+  },
+  {
+    id: 'association-rules',
+    label: 'Association rules',
+    description:
+      'Mined antecedent/consequent rules with support, confidence, and lift.',
+    path: '/data/association-rules.csv',
+    format: 'CSV',
+    size: '2.7 KB',
+    rows: '14',
+    stage: 'prepared',
+  },
+  {
+    id: 'disease-levels',
+    label: 'Disease level heatmap',
+    description:
+      'Discretised Low/Mid/High disease levels per year underlying the heatmap, with baseline medians and units.',
+    path: '/data/disease-levels.csv',
+    format: 'CSV',
+    size: '1.1 KB',
+    rows: '9',
+    stage: 'prepared',
+  },
+  {
+    id: 'model-comparison',
+    label: 'Model performance comparison',
+    description:
+      'Per-model PR-AUC, precision, recall, and lift over the base rate.',
+    path: '/data/model-comparison.csv',
+    format: 'CSV',
+    size: '0.3 KB',
+    rows: '4',
+    stage: 'prepared',
+  },
+  {
+    id: 'domains',
+    label: 'Domain profile',
+    description:
+      'Indicator counts, row volumes, and observation density for each of the 11 health domains.',
+    path: '/data/domains.csv',
+    format: 'CSV',
+    size: '0.6 KB',
+    rows: '11',
+    stage: 'prepared',
+  },
+  {
+    id: 'unit-summary',
+    label: 'Unit-inference taxonomy',
+    description:
+      'Measurement units resolved by regex inference over raw GHO metadata (Trap 2), with indicator and row counts.',
+    path: '/data/unit-summary.csv',
+    format: 'CSV',
+    size: '0.5 KB',
+    rows: '6',
+    stage: 'prepared',
+  },
+];
 
 export const DATA_PROVENANCE =
-  'World Health Organization — Global Health Observatory (GHO), Myanmar country profile. Retrieved via the official GHO OData API and redistributed here unmodified for reproducibility.';
+  'Derived from the World Health Organization Global Health Observatory (GHO), Myanmar country profile. The files above are the prepared analysis tables generated from the cleansed dataset — regenerate them with `npm run build:data`. The full raw GHO export is not yet published here.';

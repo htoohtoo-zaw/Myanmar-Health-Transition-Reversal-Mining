@@ -1,0 +1,5 @@
+model,isSelected,precision,recall,f1,alerts,prAuc,rocAuc
+Baseline (Prior rate),false,0.072,1,0.134,300,0.072,0.5
+Logistic Regression,false,0.214,0.6,0.316,56,0.195,0.712
+Random Forest,true,0.341,0.429,0.38,44,0.319,0.784
+HistGradientBoosting,false,0.286,0.371,0.323,49,0.278,0.751
