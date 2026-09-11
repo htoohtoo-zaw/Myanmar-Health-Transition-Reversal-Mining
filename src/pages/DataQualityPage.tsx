@@ -9,6 +9,7 @@ import {
   Info,
 } from 'lucide-react';
 import { KPICard } from '../components/KPICard';
+import { DataDownloads } from '../components/DataDownloads';
 import {
   DATASET_STATS,
   VALUE_TYPES,
@@ -445,6 +446,9 @@ export const DataQualityPage: React.FC = () => {
           </table>
         </div>
       </div>
+
+      {/* 6. Dataset Downloads */}
+      <DataDownloads />
     </div>
   );
 };
