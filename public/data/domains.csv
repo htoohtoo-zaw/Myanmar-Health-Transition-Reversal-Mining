@@ -1,0 +1,12 @@
+code,name,indicators,rows,obsPerInd,coverage
+D1,Mortality & Life Expectancy,54,2840,52.6,1961–2023
+D2,Cause-Specific Mortality,48,1420,29.6,2000–2021
+D3,Communicable Diseases,72,3890,54,1970–2024
+D4,Noncommunicable Diseases,61,1845,30.2,2000–2022
+D5,Mental Health & Substance Abuse,29,810,27.9,2000–2022
+D6,Reproductive & Child Health,88,3120,35.5,1980–2024
+D7,Environmental Health,34,980,28.8,1990–2022
+D8,Health Systems & UHC,142,2150,15.1,2000–2023
+D9,Health Financing,38,1220,32.1,2000–2021
+D10,Nutrition & Malnutrition,42,1490,35.5,1990–2023
+D11,Emergencies & Infectious Hazards,36,848,23.6,2005–2024

@@ -1,0 +1,15 @@
+id,antecedent,consequent,support,confidence,lift,isCoTrendingConfound,explanation
+R1,HepB_HIGH & MCV2_HIGH (Lag -1y),Diphtheria_HIGH,0.28,0.92,2.45,true,Classic co-trending confound: Both HepB/MCV2 rollout and clinical diphtheria laboratory testing expanded simultaneously in the 2000s.
+R2,DTP3_LOW (Lag -1y),Measles_Outbreak_HIGH,0.24,0.86,2.18,false,"Waning routine coverage creates an expanding cohort of susceptible infants, triggering explosive measles transmission within 12–24 months."
+R3,Surveillance_Completeness_LOW,Reported_TB_Notifications_LOW,0.25,0.88,2.3,false,Administrative reporting collapse directly depresses official case notification registries despite true community incidence rising.
+R4,MCV1_LOW & Pol3_LOW (Lag -1y),Pertussis_Reversal_HIGH,0.21,0.81,1.95,false,Synergistic breakdown of multi-antigen childhood immunisation leads to resurgence of aerosolized pertussis cases.
+R5,PCV3_HIGH & Hib3_HIGH,Under5Mortality_LOW,0.22,0.79,1.84,false,"Pneumococcal conjugate and Hib vaccines substantially reduce bacterial pneumonia, driving down infant mortality."
+R6,Malaria_Incidence_HIGH (Lag -1y),Inpatient_Bed_Occupancy_HIGH,0.19,0.74,1.76,false,Post-2020 malaria rebounds quickly saturate regional secondary hospital wards in peripheral rural townships.
+R7,DTP3_LOW & Antenatal_Care_LOW,Neonatal_Mortality_HIGH,0.18,0.76,1.71,false,Disruption in maternal health services and neonatal tetanus protection strongly correlates with early neonatal loss.
+R8,Health_Spending_OOP_HIGH,Catastrophic_Health_Expenditure_HIGH,0.26,0.84,1.68,false,High out-of-pocket health expenditure pushes vulnerable households below national poverty thresholds.
+R9,BCG_Coverage_LOW,Pediatric_Severe_TB_HIGH,0.17,0.73,1.65,false,Lapses in neonatal BCG immunisation result in elevated rates of disseminated tuberculous meningitis in infants.
+R10,Water_Safe_Drinking_LOW,Stunting_Severe_HIGH,0.2,0.71,1.58,false,Chronic enteric environmental enteropathy caused by contaminated water impedes nutrient absorption in toddlers.
+R11,Community_Health_Worker_Density_LOW,Maternal_Mortality_HIGH,0.16,0.7,1.55,false,Absence of auxiliary midwives and community volunteers delayed emergency referral pathways.
+R12,Tobacco_Excise_Tax_LOW,NCD_Adult_Mortality_HIGH,0.23,0.68,1.49,false,Affordability of unregulated cheroots and cigarettes maintains high cardiovascular event rates.
+R13,ART_Coverage_HIGH,TB_HIV_CoInfection_Mortality_LOW,0.27,0.85,1.45,false,Antiretroviral treatment suppresses viral load and dramatically cuts tuberculosis mortality in positive cohorts.
+R14,HepB_Birth_Dose_LOW,HepB_Chronic_Carrier_HIGH,0.19,0.75,1.42,false,Failure to administer birth dose within 24 hours of delivery permits perinatal transmission to persist.

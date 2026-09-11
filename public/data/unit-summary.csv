@@ -1,0 +1,7 @@
+unit,indicators,rows,example
+% (Percentage / Coverage),234,8140,"DTP3 coverage (%), Stunting prevalence (%)"
+"Rate per 100,000 population",168,5420,"Tuberculosis incidence, Suicide mortality"
+Count (Absolute observations),112,3210,"Measles cases, Polio acute flaccid cases"
+Years (Time / Expectancy),32,1680,"Life expectancy at birth, HALE"
+"Rate per 1,000 live births",26,1140,"Neonatal mortality rate, Infant mortality"
+Ratio / Index / Score,72,1023,"Physicians per 1,000, UHC Service Index"

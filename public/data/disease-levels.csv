@@ -1,0 +1,10 @@
+disease,code,category,baselineMedian,unit,tercileCuts,epiCuts,sdCuts,rawValues,years
+Tuberculosis,TB,Bacterial Respiratory,370,per 100k,350; 420,185; 740,340; 400,[object Object],[object Object]
+Malaria,MAL,Vector-borne Parasitic,12,"per 1,000",4; 20,6; 24,3.5; 22,[object Object],[object Object]
+Measles,MEAS,Viral Vaccine-Preventable,650,cases count,300; 1200,325; 1300,280; 1100,[object Object],[object Object]
+Diphtheria,DIPH,Bacterial Vaccine-Preventable,45,cases count,20; 70,22; 90,18; 75,[object Object],[object Object]
+Pertussis,PERT,Bacterial Respiratory,180,cases count,80; 290,90; 360,70; 310,[object Object],[object Object]
+Polio (Acute Flaccid),AFP,Viral Neurological,320,investigated cases,210; 380,160; 640,200; 410,[object Object],[object Object]
+Neonatal Tetanus,NTET,Bacterial Newborn,28,cases count,12; 45,14; 56,10; 50,[object Object],[object Object]
+Hepatitis B Surface Antigen,HEPB,Viral Chronic,2.2,% in under-5s,1.8; 2.9,1.1; 4.4,1.7; 3.1,[object Object],[object Object]
+Dengue & Waterborne Diarrhoea,DENG,Vector-borne & Enteric,120,severe index,85; 160,60; 240,75; 175,[object Object],[object Object]
