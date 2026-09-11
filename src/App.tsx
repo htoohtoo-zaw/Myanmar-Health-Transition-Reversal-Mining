@@ -3,6 +3,7 @@ import { NavigationPage } from './types';
 import { Navigation, TopBar } from './components/Navigation';
 import { OverviewPage } from './pages/OverviewPage';
 import { DataQualityPage } from './pages/DataQualityPage';
+import { RawDataPage } from './pages/RawDataPage';
 import { ReversalPage } from './pages/ReversalPage';
 import { ClusteringPage } from './pages/ClusteringPage';
 import { DiseaseLevelsPage } from './pages/DiseaseLevelsPage';
@@ -32,6 +33,8 @@ export default function App() {
         return <OverviewPage onNavigate={handleNavigate} />;
       case 'data-quality':
         return <DataQualityPage />;
+      case 'raw-data':
+        return <RawDataPage />;
       case 'reversal':
         return <ReversalPage />;
       case 'clustering':

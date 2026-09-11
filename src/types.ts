@@ -1,6 +1,7 @@
 export type NavigationPage =
   | 'overview'
   | 'data-quality'
+  | 'raw-data'
   | 'reversal'
   | 'clustering'
   | 'disease-levels'
