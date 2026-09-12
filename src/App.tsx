@@ -59,7 +59,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#F6F8FC] text-[#0B0F19]">
+    <div className="flex h-screen w-screen overflow-hidden bg-[var(--c-surface-2)] text-[var(--c-ink)]">
       {/* Sidebar Navigation (In-flow desktop sidebar + off-canvas mobile drawer) */}
       <Navigation
         currentPage={currentPage}

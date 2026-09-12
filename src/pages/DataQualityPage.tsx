@@ -17,8 +17,12 @@ import {
   DOMAINS,
   UNIT_SUMMARY,
 } from '../data/miningData';
+import { useTheme } from '../theme/ThemeContext';
+import { useI18n } from '../i18n/LocaleContext';
 
 export const DataQualityPage: React.FC = () => {
+  const { t } = useI18n();
+  const { colors } = useTheme();
   const [selectedType, setSelectedType] = useState<number | null>(0);
   const [activeTrap, setActiveTrap] = useState<string>('trap-1');
   const [domainSortKey, setDomainSortKey] = useState<'indicators' | 'rows' | 'obsPerInd'>('indicators');
@@ -43,87 +47,79 @@ export const DataQualityPage: React.FC = () => {
     <div className="space-y-6">
       {/* Title & Introduction */}
       <div>
-        <h1 className="text-[26px] md:text-[30px] font-bold text-[#0B0F19]">
-          Dataset Understanding & Four Data-Quality Traps
-        </h1>
-        <p className="text-[14px] text-[#60636A] mt-1 max-w-4xl">
-          Detailed audit of the WHO Global Health Observatory repository for Myanmar. Demonstrates specific problem identification, schema extraction, and cleansing safeguards executed prior to mining.
-        </p>
+        <h1 className="text-[26px] md:text-[30px] font-bold text-[var(--c-ink)]"> {t('Dataset Understanding & Four Data-Quality Traps')} </h1>
+        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl"> {t('Detailed audit of the WHO Global Health Observatory repository for Myanmar. Demonstrates specific problem identification, schema extraction, and cleansing safeguards executed prior to mining.')} </p>
       </div>
 
       {/* 1. Dataset Profile Card */}
-      <div className="bg-white border border-[#E4E9F2] rounded-[8px] p-5 shadow-[0_1px_2px_rgba(11,15,25,0.06)]">
-        <h3 className="text-[16px] font-semibold text-[#0B0F19] mb-4">
-          Core Repository Profile & Dimension Types
-        </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pb-5 border-b border-[#E4E9F2]">
+      <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)]">
+        <h3 className="text-[16px] font-semibold text-[var(--c-ink)] mb-4"> {t('Core Repository Profile & Dimension Types')} </h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pb-5 border-b border-[var(--c-border)]">
           <div>
-            <span className="text-[12px] text-[#60636A]">Total Observations</span>
-            <div className="text-[24px] font-bold text-[#0B0F19] tabular-nums">20,613</div>
-            <span className="text-[11px] text-[#2F9E68]">100% verified schema</span>
+            <span className="text-[12px] text-[var(--c-muted)]">{t('Total Observations')}</span>
+            <div className="text-[24px] font-bold text-[var(--c-ink)] tabular-nums">20,613</div>
+            <span className="text-[11px] text-[var(--c-success)]">{t('100% verified schema')}</span>
           </div>
           <div>
-            <span className="text-[12px] text-[#60636A]">Unique Indicators</span>
-            <div className="text-[24px] font-bold text-[#0B0F19] tabular-nums">644</div>
-            <span className="text-[11px] text-[#60636A]">Across 11 WHO domains</span>
+            <span className="text-[12px] text-[var(--c-muted)]">{t('Unique Indicators')}</span>
+            <div className="text-[24px] font-bold text-[var(--c-ink)] tabular-nums">644</div>
+            <span className="text-[11px] text-[var(--c-muted)]">{t('Across 11 WHO domains')}</span>
           </div>
           <div>
-            <span className="text-[12px] text-[#60636A]">Temporal Span</span>
-            <div className="text-[24px] font-bold text-[#0B0F19] tabular-nums">1961–2030</div>
-            <span className="text-[11px] text-[#60636A]">Historical & projected</span>
+            <span className="text-[12px] text-[var(--c-muted)]">{t('Temporal Span')}</span>
+            <div className="text-[24px] font-bold text-[var(--c-ink)] tabular-nums">1961–2030</div>
+            <span className="text-[11px] text-[var(--c-muted)]">{t('Historical & projected')}</span>
           </div>
           <div>
-            <span className="text-[12px] text-[#60636A]">Disaggregation Rate</span>
-            <div className="text-[24px] font-bold text-[#0B0F19] tabular-nums">42.6%</div>
-            <span className="text-[11px] text-[#1C4BBC]">8,771 disaggregated rows</span>
+            <span className="text-[12px] text-[var(--c-muted)]">{t('Disaggregation Rate')}</span>
+            <div className="text-[24px] font-bold text-[var(--c-ink)] tabular-nums">42.6%</div>
+            <span className="text-[11px] text-[var(--c-primary)]">{t('8,771 disaggregated rows')}</span>
           </div>
         </div>
 
         {/* Small Dimension Breakdown Table */}
         <div className="mt-4">
-          <div className="text-[13px] font-semibold text-[#0B0F19] mb-2">
-            Disaggregation Dimension Breakdown
-          </div>
+          <div className="text-[13px] font-semibold text-[var(--c-ink)] mb-2"> {t('Disaggregation Dimension Breakdown')} </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-[13px]">
               <thead>
-                <tr className="border-b border-[#E4E9F2] text-[#60636A]">
-                  <th className="py-2 font-medium">Dimension Code</th>
-                  <th className="py-2 font-medium">Description</th>
-                  <th className="py-2 font-medium">Row Count</th>
-                  <th className="py-2 font-medium">% of Total</th>
+                <tr className="border-b border-[var(--c-border)] text-[var(--c-muted)]">
+                  <th className="py-2 font-medium">{t('Dimension Code')}</th>
+                  <th className="py-2 font-medium">{t('Description')}</th>
+                  <th className="py-2 font-medium">{t('Row Count')}</th>
+                  <th className="py-2 font-medium">{t('% of Total')}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E4E9F2]">
+              <tbody className="divide-y divide-[var(--c-border)]">
                 <tr>
-                  <td className="py-2 font-semibold text-[#0B0F19]">TOTAL</td>
-                  <td className="py-2 text-[#60636A]">National aggregated indicators</td>
-                  <td className="py-2 font-mono tabular-nums text-[#0B0F19]">11,842</td>
-                  <td className="py-2 text-[#60636A]">57.4%</td>
+                  <td className="py-2 font-semibold text-[var(--c-ink)]">{t('TOTAL')}</td>
+                  <td className="py-2 text-[var(--c-muted)]">{t('National aggregated indicators')}</td>
+                  <td className="py-2 font-mono tabular-nums text-[var(--c-ink)]">11,842</td>
+                  <td className="py-2 text-[var(--c-muted)]">57.4%</td>
                 </tr>
                 <tr>
-                  <td className="py-2 font-semibold text-[#0B0F19]">SEX</td>
-                  <td className="py-2 text-[#60636A]">Male / Female / Both Sexes</td>
-                  <td className="py-2 font-mono tabular-nums text-[#0B0F19]">5,120</td>
-                  <td className="py-2 text-[#60636A]">24.8%</td>
+                  <td className="py-2 font-semibold text-[var(--c-ink)]">{t('SEX')}</td>
+                  <td className="py-2 text-[var(--c-muted)]">{t('Male / Female / Both Sexes')}</td>
+                  <td className="py-2 font-mono tabular-nums text-[var(--c-ink)]">5,120</td>
+                  <td className="py-2 text-[var(--c-muted)]">24.8%</td>
                 </tr>
                 <tr>
-                  <td className="py-2 font-semibold text-[#0B0F19]">RESIDENCEAREATYPE</td>
-                  <td className="py-2 text-[#60636A]">Urban vs. Rural splits</td>
-                  <td className="py-2 font-mono tabular-nums text-[#0B0F19]">1,740</td>
-                  <td className="py-2 text-[#60636A]">8.4%</td>
+                  <td className="py-2 font-semibold text-[var(--c-ink)]">{t('RESIDENCEAREATYPE')}</td>
+                  <td className="py-2 text-[var(--c-muted)]">{t('Urban vs. Rural splits')}</td>
+                  <td className="py-2 font-mono tabular-nums text-[var(--c-ink)]">1,740</td>
+                  <td className="py-2 text-[var(--c-muted)]">8.4%</td>
                 </tr>
                 <tr>
-                  <td className="py-2 font-semibold text-[#0B0F19]">AGEGROUP</td>
-                  <td className="py-2 text-[#60636A]">5-year cohorts and child brackets</td>
-                  <td className="py-2 font-mono tabular-nums text-[#0B0F19]">1,438</td>
-                  <td className="py-2 text-[#60636A]">7.0%</td>
+                  <td className="py-2 font-semibold text-[var(--c-ink)]">{t('AGEGROUP')}</td>
+                  <td className="py-2 text-[var(--c-muted)]">{t('5-year cohorts and child brackets')}</td>
+                  <td className="py-2 font-mono tabular-nums text-[var(--c-ink)]">1,438</td>
+                  <td className="py-2 text-[var(--c-muted)]">7.0%</td>
                 </tr>
                 <tr>
-                  <td className="py-2 font-semibold text-[#0B0F19]">ALCOHOLTYPE / SEVERITY</td>
-                  <td className="py-2 text-[#60636A]">Beverage category and clinical stages</td>
-                  <td className="py-2 font-mono tabular-nums text-[#0B0F19]">473</td>
-                  <td className="py-2 text-[#60636A]">2.4%</td>
+                  <td className="py-2 font-semibold text-[var(--c-ink)]">{t('ALCOHOLTYPE / SEVERITY')}</td>
+                  <td className="py-2 text-[var(--c-muted)]">{t('Beverage category and clinical stages')}</td>
+                  <td className="py-2 font-mono tabular-nums text-[var(--c-ink)]">473</td>
+                  <td className="py-2 text-[var(--c-muted)]">2.4%</td>
                 </tr>
               </tbody>
             </table>
@@ -132,70 +128,63 @@ export const DataQualityPage: React.FC = () => {
       </div>
 
       {/* 2. Value-Type Interactive Segments */}
-      <div className="bg-white border border-[#E4E9F2] rounded-[8px] p-5 shadow-[0_1px_2px_rgba(11,15,25,0.06)]">
+      <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)]">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="text-[16px] font-semibold text-[#0B0F19]">
-              Value-Type Distribution
-            </h3>
-            <p className="text-[12px] text-[#60636A]">
-              Click any segment below to inspect preprocessing resolution
-            </p>
+            <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('Value-Type Distribution')} </h3>
+            <p className="text-[12px] text-[var(--c-muted)]"> {t('Click any segment below to inspect preprocessing resolution')} </p>
           </div>
-          <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[#EDF1FA] text-[#1C4BBC]">
-            Interactive Inspector
-          </span>
+          <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[var(--c-subtle)] text-[var(--c-primary)]"> {t('Interactive Inspector')} </span>
         </div>
 
         {/* Stacked Proportional Bar */}
         <div className="h-6 w-full flex rounded-[6px] overflow-hidden mb-4">
-          {VALUE_TYPES.map((t, idx) => (
+          {VALUE_TYPES.map((vt, idx) => (
             <div
-              key={t.type}
+              key={vt.type}
               onClick={() => setSelectedType(idx)}
               className="h-full cursor-pointer transition-opacity hover:opacity-90"
               style={{
-                width: t.pct,
-                backgroundColor: t.color,
+                width: vt.pct,
+                backgroundColor: colors[vt.colorKey],
               }}
-              title={`${t.type}: ${t.count.toLocaleString()} (${t.pct})`}
+              title={`${vt.type}: ${vt.count.toLocaleString()} (${vt.pct})`}
             />
           ))}
         </div>
 
         {/* Segment Selectors */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          {VALUE_TYPES.map((t, idx) => {
+          {VALUE_TYPES.map((vt, idx) => {
             const isSelected = selectedType === idx;
             return (
               <div
-                key={t.type}
+                key={vt.type}
                 onClick={() => setSelectedType(idx)}
                 className={`p-3.5 rounded-[8px] border cursor-pointer transition-all ${
                   isSelected
-                    ? 'border-[#1C4BBC] bg-[#DDE4F5]/40 shadow-[0_1px_2px_rgba(11,15,25,0.06)]'
-                    : 'border-[#E4E9F2] hover:border-[#CAD3E6] bg-white'
+                    ? 'border-[var(--c-primary)] bg-[var(--c-subtle-2)]/40 shadow-[var(--c-shadow-sm)]'
+                    : 'border-[var(--c-border)] hover:border-[var(--c-border-strong)] bg-[var(--c-surface)]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
                     <span
                       className="w-2.5 h-2.5 rounded-full"
-                      style={{ backgroundColor: t.color }}
+                      style={{ backgroundColor: colors[vt.colorKey] }}
                     />
-                    <span className="text-[13px] font-semibold text-[#0B0F19]">
-                      {t.type}
+                    <span className="text-[13px] font-semibold text-[var(--c-ink)]">
+                      {vt.type}
                     </span>
                   </div>
-                  <span className="text-[12px] font-mono tabular-nums text-[#60636A]">
-                    {t.pct}
+                  <span className="text-[12px] font-mono tabular-nums text-[var(--c-muted)]">
+                    {vt.pct}
                   </span>
                 </div>
-                <div className="text-[18px] font-bold text-[#0B0F19] tabular-nums">
-                  {t.count.toLocaleString()} rows
-                </div>
-                <p className="text-[11px] text-[#60636A] mt-2 leading-relaxed">
-                  {t.description}
+                <div className="text-[18px] font-bold text-[var(--c-ink)] tabular-nums">
+                  {vt.count.toLocaleString()} {t('rows')} </div>
+                <p className="text-[11px] text-[var(--c-muted)] mt-2 leading-relaxed">
+                  {t(vt.description)}
                 </p>
               </div>
             );
@@ -204,21 +193,15 @@ export const DataQualityPage: React.FC = () => {
       </div>
 
       {/* 3. The Four Data-Quality Problems (Interactive Stepper / Accordion) */}
-      <div className="bg-white border border-[#E4E9F2] rounded-[8px] p-5 shadow-[0_1px_2px_rgba(11,15,25,0.06)]">
+      <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)]">
         <div className="mb-4">
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-[#C4453F] mb-1">
-            CRISP-DM DATA PREPARATION
-          </div>
-          <h3 className="text-[18px] font-bold text-[#0B0F19]">
-            The Four Data-Quality Traps & Cleansing Safeguards
-          </h3>
-          <p className="text-[13px] text-[#60636A] mt-1">
-            Crucial engineering fixes implemented in pandas/NumPy to prevent invalid inferences and spurious correlations.
-          </p>
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--c-danger)] mb-1"> {t('CRISP-DM DATA PREPARATION')} </div>
+          <h3 className="text-[18px] font-bold text-[var(--c-ink)]"> {t('The Four Data-Quality Traps & Cleansing Safeguards')} </h3>
+          <p className="text-[13px] text-[var(--c-muted)] mt-1"> {t('Crucial engineering fixes implemented in pandas/NumPy to prevent invalid inferences and spurious correlations.')} </p>
         </div>
 
         {/* Stepper Tabs */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 border-b border-[#E4E9F2] pb-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 border-b border-[var(--c-border)] pb-3">
           {FOUR_TRAPS.map((trap) => {
             const isActive = activeTrap === trap.id;
             return (
@@ -228,12 +211,11 @@ export const DataQualityPage: React.FC = () => {
                 onClick={() => setActiveTrap(trap.id)}
                 className={`text-left p-2.5 rounded-[6px] transition-colors ${
                   isActive
-                    ? 'bg-[#1C4BBC] text-white'
-                    : 'bg-[#EDF1FA] text-[#0B0F19] hover:bg-[#DDE4F5]'
+                    ? 'bg-[var(--c-primary)] text-white'
+                    : 'bg-[var(--c-subtle)] text-[var(--c-ink)] hover:bg-[var(--c-subtle-2)]'
                 }`}
               >
-                <div className="text-[11px] font-semibold uppercase opacity-80">
-                  Trap {trap.number}
+                <div className="text-[11px] font-semibold uppercase opacity-80"> {t('Trap')} {trap.number}
                 </div>
                 <div className="text-[12px] font-bold truncate">
                   {trap.title.split(' ')[0]} {trap.title.split(' ')[1]}...
@@ -247,40 +229,34 @@ export const DataQualityPage: React.FC = () => {
         {(() => {
           const trap = FOUR_TRAPS.find((t) => t.id === activeTrap)!;
           return (
-            <div className="p-4 rounded-[8px] bg-[#EDF1FA]/60 border border-[#CAD3E6] space-y-4">
+            <div className="p-4 rounded-[8px] bg-[var(--c-subtle)]/60 border border-[var(--c-border-strong)] space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-[#C4453F] text-white">
-                    Trap #{trap.number}
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded bg-[var(--c-danger)] text-white"> {t('Trap #')}{trap.number}
                   </span>
-                  <h4 className="text-[16px] font-bold text-[#0B0F19] mt-1">
-                    {trap.title}
+                  <h4 className="text-[16px] font-bold text-[var(--c-ink)] mt-1">
+                    {t(trap.title)}
                   </h4>
                 </div>
-                <div className="text-[12px] font-semibold text-[#1C4BBC] bg-white px-3 py-1 rounded-[6px] border border-[#CAD3E6] self-start">
-                  Impacted: {trap.affectedCount} instances
-                </div>
+                <div className="text-[12px] font-semibold text-[var(--c-primary)] bg-[var(--c-surface)] px-3 py-1 rounded-[6px] border border-[var(--c-border-strong)] self-start"> {t('Impacted:')} {trap.affectedCount} {t('instances')} </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white p-3.5 rounded-[6px] border border-[#E4E9F2]">
-                  <div className="text-[12px] font-bold text-[#C4453F] mb-1 flex items-center gap-1.5">
-                    <AlertTriangle size={14} /> Identified Vulnerability
-                  </div>
-                  <p className="text-[12px] text-[#0B0F19] leading-relaxed">
-                    {trap.problem}
+                <div className="bg-[var(--c-surface)] p-3.5 rounded-[6px] border border-[var(--c-border)]">
+                  <div className="text-[12px] font-bold text-[var(--c-danger)] mb-1 flex items-center gap-1.5">
+                    <AlertTriangle size={14} /> {t('Identified Vulnerability')} </div>
+                  <p className="text-[12px] text-[var(--c-ink)] leading-relaxed">
+                    {t(trap.problem)}
                   </p>
-                  <p className="text-[11px] text-[#60636A] mt-2 italic">
-                    Impact: {trap.impact}
+                  <p className="text-[11px] text-[var(--c-muted)] mt-2 italic"> {t('Impact:')} {t(trap.impact)}
                   </p>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-[6px] border border-[#E4E9F2]">
-                  <div className="text-[12px] font-bold text-[#2F9E68] mb-1 flex items-center gap-1.5">
-                    <CheckCircle2 size={14} /> Pipeline Solution Implemented
-                  </div>
-                  <p className="text-[12px] text-[#0B0F19] leading-relaxed">
-                    {trap.fix}
+                <div className="bg-[var(--c-surface)] p-3.5 rounded-[6px] border border-[var(--c-border)]">
+                  <div className="text-[12px] font-bold text-[var(--c-success)] mb-1 flex items-center gap-1.5">
+                    <CheckCircle2 size={14} /> {t('Pipeline Solution Implemented')} </div>
+                  <p className="text-[12px] text-[var(--c-ink)] leading-relaxed">
+                    {t(trap.fix)}
                   </p>
                 </div>
               </div>
@@ -288,18 +264,16 @@ export const DataQualityPage: React.FC = () => {
               {/* Before & After Example Tables */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                 <div>
-                  <div className="text-[11px] font-semibold uppercase tracking-wider text-[#C4453F] mb-1">
-                    Before Cleansing (Raw GHO Record)
-                  </div>
-                  <div className="bg-white rounded-[6px] border border-[#E4E9F2] overflow-x-auto">
+                  <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--c-danger)] mb-1"> {t('Before Cleansing (Raw GHO Record)')} </div>
+                  <div className="bg-[var(--c-surface)] rounded-[6px] border border-[var(--c-border)] overflow-x-auto">
                     <table className="w-full text-left text-[11px]">
-                      <tbody className="divide-y divide-[#E4E9F2]">
+                      <tbody className="divide-y divide-[var(--c-border)]">
                         {trap.exampleBefore.map((row, i) => (
                           <tr key={i} className="p-2">
                             {Object.entries(row).map(([k, v]) => (
                               <td key={k} className="p-2">
-                                <span className="font-medium text-[#60636A]">{k}: </span>
-                                <span className="text-[#C4453F] font-mono">{v}</span>
+                                <span className="font-medium text-[var(--c-muted)]">{k}: </span>
+                                <span className="text-[var(--c-danger)] font-mono">{v}</span>
                               </td>
                             ))}
                           </tr>
@@ -310,18 +284,16 @@ export const DataQualityPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <div className="text-[11px] font-semibold uppercase tracking-wider text-[#2F9E68] mb-1">
-                    After Cleansing (Prepared Mining Dataset)
-                  </div>
-                  <div className="bg-white rounded-[6px] border border-[#E4E9F2] overflow-x-auto">
+                  <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--c-success)] mb-1"> {t('After Cleansing (Prepared Mining Dataset)')} </div>
+                  <div className="bg-[var(--c-surface)] rounded-[6px] border border-[var(--c-border)] overflow-x-auto">
                     <table className="w-full text-left text-[11px]">
-                      <tbody className="divide-y divide-[#E4E9F2]">
+                      <tbody className="divide-y divide-[var(--c-border)]">
                         {trap.exampleAfter.map((row, i) => (
                           <tr key={i} className="p-2">
                             {Object.entries(row).map(([k, v]) => (
                               <td key={k} className="p-2">
-                                <span className="font-medium text-[#60636A]">{k}: </span>
-                                <span className="text-[#2F9E68] font-mono">{v}</span>
+                                <span className="font-medium text-[var(--c-muted)]">{k}: </span>
+                                <span className="text-[var(--c-success)] font-mono">{v}</span>
                               </td>
                             ))}
                           </tr>
@@ -337,72 +309,68 @@ export const DataQualityPage: React.FC = () => {
       </div>
 
       {/* 4. Domain Taxonomy Table */}
-      <div className="bg-white border border-[#E4E9F2] rounded-[8px] p-5 shadow-[0_1px_2px_rgba(11,15,25,0.06)]">
+      <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
           <div>
-            <h3 className="text-[16px] font-semibold text-[#0B0F19]">
-              WHO Thematic Domain Taxonomy (Table 2.5)
-            </h3>
-            <p className="text-[12px] text-[#60636A]">
-              Sortable mapping of indicators, raw row volumes, and observation density per domain
-            </p>
+            <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('WHO Thematic Domain Taxonomy (Table 2.5)')} </h3>
+            <p className="text-[12px] text-[var(--c-muted)]"> {t('Sortable mapping of indicators, raw row volumes, and observation density per domain')} </p>
           </div>
-          <span className="text-[11px] text-[#60636A]">Click headers to sort</span>
+          <span className="text-[11px] text-[var(--c-muted)]">{t('Click headers to sort')}</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-[13px]">
             <thead>
-              <tr className="border-b border-[#E4E9F2] text-[#60636A]">
-                <th className="py-2.5 px-3 font-medium">Domain</th>
-                <th className="py-2.5 px-3 font-medium">Name</th>
+              <tr className="border-b border-[var(--c-border)] text-[var(--c-muted)]">
+                <th className="py-2.5 px-3 font-medium">{t('Domain')}</th>
+                <th className="py-2.5 px-3 font-medium">{t('Name')}</th>
                 <th
                   onClick={() => toggleDomainSort('indicators')}
-                  className="py-2.5 px-3 font-medium cursor-pointer hover:text-[#1C4BBC]"
+                  className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>Indicators</span>
+                    <span>{t('Indicators')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
                 <th
                   onClick={() => toggleDomainSort('rows')}
-                  className="py-2.5 px-3 font-medium cursor-pointer hover:text-[#1C4BBC]"
+                  className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>Total Rows</span>
+                    <span>{t('Total Rows')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
                 <th
                   onClick={() => toggleDomainSort('obsPerInd')}
-                  className="py-2.5 px-3 font-medium cursor-pointer hover:text-[#1C4BBC]"
+                  className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>Obs / Indicator</span>
+                    <span>{t('Obs / Indicator')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
-                <th className="py-2.5 px-3 font-medium">Span</th>
+                <th className="py-2.5 px-3 font-medium">{t('Span')}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E4E9F2]">
+            <tbody className="divide-y divide-[var(--c-border)]">
               {sortedDomains.map((d) => (
-                <tr key={d.code} className="hover:bg-[#EDF1FA]/50 transition-colors">
-                  <td className="py-2.5 px-3 font-mono font-semibold text-[#1C4BBC]">
+                <tr key={d.code} className="hover:bg-[var(--c-subtle)]/50 transition-colors">
+                  <td className="py-2.5 px-3 font-mono font-semibold text-[var(--c-primary)]">
                     {d.code}
                   </td>
-                  <td className="py-2.5 px-3 font-medium text-[#0B0F19]">{d.name}</td>
-                  <td className="py-2.5 px-3 font-mono tabular-nums text-[#0B0F19]">
+                  <td className="py-2.5 px-3 font-medium text-[var(--c-ink)]">{t(d.name)}</td>
+                  <td className="py-2.5 px-3 font-mono tabular-nums text-[var(--c-ink)]">
                     {d.indicators}
                   </td>
-                  <td className="py-2.5 px-3 font-mono tabular-nums text-[#0B0F19]">
+                  <td className="py-2.5 px-3 font-mono tabular-nums text-[var(--c-ink)]">
                     {d.rows.toLocaleString()}
                   </td>
-                  <td className="py-2.5 px-3 font-mono tabular-nums text-[#0B0F19]">
+                  <td className="py-2.5 px-3 font-mono tabular-nums text-[var(--c-ink)]">
                     {d.obsPerInd.toFixed(1)}
                   </td>
-                  <td className="py-2.5 px-3 text-[12px] text-[#60636A] font-mono">
+                  <td className="py-2.5 px-3 text-[12px] text-[var(--c-muted)] font-mono">
                     {d.coverage}
                   </td>
                 </tr>
@@ -413,33 +381,29 @@ export const DataQualityPage: React.FC = () => {
       </div>
 
       {/* 5. Unit Inference Summary */}
-      <div className="bg-white border border-[#E4E9F2] rounded-[8px] p-5 shadow-[0_1px_2px_rgba(11,15,25,0.06)]">
+      <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)]">
         <div className="mb-3">
-          <h3 className="text-[16px] font-semibold text-[#0B0F19]">
-            Unit-Inference Taxonomy (Resolving Trap 2)
-          </h3>
-          <p className="text-[12px] text-[#60636A]">
-            Standardized physical unit categories inferred via regex pattern matching on raw metadata strings
-          </p>
+          <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('Unit-Inference Taxonomy (Resolving Trap 2)')} </h3>
+          <p className="text-[12px] text-[var(--c-muted)]"> {t('Standardized physical unit categories inferred via regex pattern matching on raw metadata strings')} </p>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-[13px]">
             <thead>
-              <tr className="border-b border-[#E4E9F2] text-[#60636A]">
-                <th className="py-2 font-medium">Inferred Measurement Unit</th>
-                <th className="py-2 font-medium">Indicators</th>
-                <th className="py-2 font-medium">Rows</th>
-                <th className="py-2 font-medium">Representative Examples</th>
+              <tr className="border-b border-[var(--c-border)] text-[var(--c-muted)]">
+                <th className="py-2 font-medium">{t('Inferred Measurement Unit')}</th>
+                <th className="py-2 font-medium">{t('Indicators')}</th>
+                <th className="py-2 font-medium">{t('Rows')}</th>
+                <th className="py-2 font-medium">{t('Representative Examples')}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E4E9F2]">
+            <tbody className="divide-y divide-[var(--c-border)]">
               {UNIT_SUMMARY.map((u, i) => (
-                <tr key={i} className="hover:bg-[#EDF1FA]/40">
-                  <td className="py-2.5 font-semibold text-[#0B0F19]">{u.unit}</td>
-                  <td className="py-2.5 font-mono tabular-nums text-[#0B0F19]">{u.indicators}</td>
-                  <td className="py-2.5 font-mono tabular-nums text-[#60636A]">{u.rows.toLocaleString()}</td>
-                  <td className="py-2.5 text-[12px] text-[#60636A] italic">{u.example}</td>
+                <tr key={i} className="hover:bg-[var(--c-subtle)]/40">
+                  <td className="py-2.5 font-semibold text-[var(--c-ink)]">{t(u.unit)}</td>
+                  <td className="py-2.5 font-mono tabular-nums text-[var(--c-ink)]">{u.indicators}</td>
+                  <td className="py-2.5 font-mono tabular-nums text-[var(--c-muted)]">{u.rows.toLocaleString()}</td>
+                  <td className="py-2.5 text-[12px] text-[var(--c-muted)] italic">{u.example}</td>
                 </tr>
               ))}
             </tbody>

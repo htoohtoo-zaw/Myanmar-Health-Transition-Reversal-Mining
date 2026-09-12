@@ -13,12 +13,14 @@ import {
   Calendar,
 } from 'lucide-react';
 import { NavigationPage } from '../types';
+import { useI18n } from '../i18n/LocaleContext';
 
 interface AboutPageProps {
   onNavigate?: (page: NavigationPage) => void;
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
+  const { t } = useI18n();
   const crispdmPhases = [
     {
       phase: 'Phase 1',
@@ -62,30 +64,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     <div className="space-y-6">
       {/* Page Title & Scope */}
       <div>
-        <h1 className="text-[28px] md:text-[32px] font-bold text-[#0B0F19] leading-tight">
-          Methodology & Project Reference
-        </h1>
-        <p className="text-[14px] text-[#60636A] mt-1 max-w-4xl">
-          CRISP-DM data mining workflow, epidemiological definitions, technical citations, and analytical caveats for the Myanmar Health Transition & Reversal Analysis project.
-        </p>
+        <h1 className="text-[28px] md:text-[32px] font-bold text-[var(--c-ink)] leading-tight"> {t('Methodology & Project Reference')} </h1>
+        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl"> {t('CRISP-DM data mining workflow, epidemiological definitions, technical citations, and analytical caveats for the Myanmar Health Transition & Reversal Analysis project.')} </p>
       </div>
 
       {/* Overview Card */}
-      <div className="bg-white border border-[#E4E9F2] rounded-[8px] p-6 shadow-xs">
+      <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-6 shadow-xs">
         <div className="flex items-start gap-4">
-          <div className="w-12 h-12 rounded-[8px] bg-[#1C4BBC]/10 text-[#1C4BBC] flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-[8px] bg-[var(--c-primary)]/10 text-[var(--c-primary)] flex items-center justify-center shrink-0">
             <BookOpen size={24} />
           </div>
           <div>
-            <h2 className="text-[18px] font-bold text-[#0B0F19]">
-              Project Objective & Research Motivation
-            </h2>
-            <p className="text-[14px] text-[#60636A] mt-2 leading-relaxed">
-              Between 1990 and 2019, Myanmar achieved substantial public health progress: malaria mortality declined by over 90%, maternal mortality dropped significantly, and routine immunisation coverage reached historical highs. However, compound shocks—including the COVID-19 pandemic, the February 2021 political crisis, civil conflict, and economic contraction—precipitated acute setbacks across disease control and reporting infrastructure.
-            </p>
-            <p className="text-[14px] text-[#60636A] mt-2 leading-relaxed">
-              This analytics platform implements a comprehensive <strong>CRISP-DM data mining pipeline</strong> on the complete World Health Organization (WHO) Global Health Observatory repository for Myanmar, systematically identifying turning points, categorising trajectory archetypes, and training predictive models to detect acute deterioration signals before systemic collapse.
-            </p>
+            <h2 className="text-[18px] font-bold text-[var(--c-ink)]"> {t('Project Objective & Research Motivation')} </h2>
+            <p className="text-[14px] text-[var(--c-muted)] mt-2 leading-relaxed"> {t('Between 1990 and 2019, Myanmar achieved substantial public health progress: malaria mortality declined by over 90%, maternal mortality dropped significantly, and routine immunisation coverage reached historical highs. However, compound shocks—including the COVID-19 pandemic, the February 2021 political crisis, civil conflict, and economic contraction—precipitated acute setbacks across disease control and reporting infrastructure.')} </p>
+            <p className="text-[14px] text-[var(--c-muted)] mt-2 leading-relaxed"> {t('This analytics platform implements a comprehensive')} <strong>{t('CRISP-DM data mining pipeline')}</strong> {t('on the complete World Health Organization (WHO) Global Health Observatory repository for Myanmar, systematically identifying turning points, categorising trajectory archetypes, and training predictive models to detect acute deterioration signals before systemic collapse.')} </p>
           </div>
         </div>
       </div>
@@ -94,37 +86,33 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       <div>
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-[18px] font-bold text-[#0B0F19]">
-              CRISP-DM Data Mining Architecture
-            </h2>
-            <p className="text-[13px] text-[#60636A]">
-              Six-phase execution architecture from domain formulation to decision support
-            </p>
+            <h2 className="text-[18px] font-bold text-[var(--c-ink)]"> {t('CRISP-DM Data Mining Architecture')} </h2>
+            <p className="text-[13px] text-[var(--c-muted)]"> {t('Six-phase execution architecture from domain formulation to decision support')} </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {crispdmPhases.map((phase) => (
             <div
-              key={phase.phase}
-              className="bg-white border border-[#E4E9F2] rounded-[8px] p-5 shadow-xs flex flex-col justify-between"
+              key={t(phase.phase)}
+              className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-xs flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-2.5">
-                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-[4px] bg-[#EDF1FA] text-[#1C4BBC] border border-[#CAD3E6]">
-                    {phase.phase}
+                  <span className="text-[11px] font-semibold px-2 py-0.5 rounded-[4px] bg-[var(--c-subtle)] text-[var(--c-primary)] border border-[var(--c-border-strong)]">
+                    {t(phase.phase)}
                   </span>
-                  <CheckCircle2 size={16} className="text-[#2F9E68]" />
+                  <CheckCircle2 size={16} className="text-[var(--c-success)]" />
                 </div>
-                <h3 className="text-[15px] font-bold text-[#0B0F19] mb-1.5">
-                  {phase.title}
+                <h3 className="text-[15px] font-bold text-[var(--c-ink)] mb-1.5">
+                  {t(phase.title)}
                 </h3>
-                <p className="text-[13px] text-[#60636A] leading-relaxed">
+                <p className="text-[13px] text-[var(--c-muted)] leading-relaxed">
                   {phase.desc}
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-[#E4E9F2] text-[11px] font-mono text-[#1C4BBC]">
+              <div className="mt-4 pt-3 border-t border-[var(--c-border)] text-[11px] font-mono text-[var(--c-primary)]">
                 {phase.focus}
               </div>
             </div>
@@ -133,44 +121,32 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Critical Methodological Caveats */}
-      <div className="bg-[#EDF1FA]/60 border border-[#CAD3E6] rounded-[8px] p-5">
+      <div className="bg-[var(--c-subtle)]/60 border border-[var(--c-border-strong)] rounded-[8px] p-5">
         <div className="flex items-start gap-3">
-          <AlertOctagon size={20} className="text-[#C68A1E] shrink-0 mt-0.5" />
+          <AlertOctagon size={20} className="text-[var(--c-warning)] shrink-0 mt-0.5" />
           <div className="space-y-2">
-            <h3 className="text-[14px] font-bold text-[#0B0F19]">
-              Analytical Caveats & Interpretation Guidelines
-            </h3>
-            <ul className="space-y-1.5 text-[13px] text-[#60636A] list-disc list-inside">
+            <h3 className="text-[14px] font-bold text-[var(--c-ink)]"> {t('Analytical Caveats & Interpretation Guidelines')} </h3>
+            <ul className="space-y-1.5 text-[13px] text-[var(--c-muted)] list-disc list-inside">
               <li>
-                <strong>Surveillance Collapse Confound:</strong> The post-2021 decline in reported case counts for certain conditions reflects the withdrawal and fracturing of health facility reporting systems rather than true biological eradication.
-              </li>
+                <strong>{t('Surveillance Collapse Confound:')}</strong> {t('The post-2021 decline in reported case counts for certain conditions reflects the withdrawal and fracturing of health facility reporting systems rather than true biological eradication.')} </li>
               <li>
-                <strong>Association vs. Causation:</strong> Association rules derived from Apriori capture temporal co-occurrence and shared macro-economic disruptions; they should not be interpreted as isolated biochemical or clinical causal vectors.
-              </li>
+                <strong>{t('Association vs. Causation:')}</strong> {t('Association rules derived from Apriori capture temporal co-occurrence and shared macro-economic disruptions; they should not be interpreted as isolated biochemical or clinical causal vectors.')} </li>
               <li>
-                <strong>Temporal Validation Requirement:</strong> Cross-validation across longitudinal health indicators must always use forward-chaining temporal splits (e.g., Train: 1961–2017, Val: 2018–2020, Test: 2021–2023) rather than random K-Fold splits to prevent severe data leakage.
-              </li>
+                <strong>{t('Temporal Validation Requirement:')}</strong> {t('Cross-validation across longitudinal health indicators must always use forward-chaining temporal splits (e.g., Train: 1961–2017, Val: 2018–2020, Test: 2021–2023) rather than random K-Fold splits to prevent severe data leakage.')} </li>
             </ul>
           </div>
         </div>
       </div>
 
       {/* Dataset & Primary Citation */}
-      <div className="bg-white border border-[#E4E9F2] rounded-[8px] p-6 shadow-xs">
-        <h2 className="text-[16px] font-bold text-[#0B0F19] mb-3 flex items-center gap-2">
-          <Database size={18} className="text-[#1C4BBC]" />
-          Data Sources & Technical Citations
-        </h2>
-        <div className="space-y-3 text-[13px] text-[#60636A] leading-relaxed">
+      <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-6 shadow-xs">
+        <h2 className="text-[16px] font-bold text-[var(--c-ink)] mb-3 flex items-center gap-2">
+          <Database size={18} className="text-[var(--c-primary)]" /> {t('Data Sources & Technical Citations')} </h2>
+        <div className="space-y-3 text-[13px] text-[var(--c-muted)] leading-relaxed">
           <p>
-            <strong>Primary Repository:</strong> World Health Organization (WHO) Global Health Observatory (GHO) data repository for Myanmar (Country Code: <code>MMR</code>), extracted via the official OData REST API.
-          </p>
-          <div className="p-3 bg-[#F6F8FC] rounded-[6px] border border-[#E4E9F2] font-mono text-[12px] text-[#0B0F19] overflow-x-auto">
-            World Health Organization. (2024). Global Health Observatory Data Repository: Myanmar Country Statistics [Data set]. WHO. https://www.who.int/data/gho
-          </div>
-          <p className="text-[12px] text-[#919398]">
-            Indicators indexed under SDG 3 (Good Health and Well-Being), WHO Global Tuberculosis Programme, WHO Global Malaria Programme, and the WHO/UNICEF Joint Monitoring Programme.
-          </p>
+            <strong>{t('Primary Repository:')}</strong> {t('World Health Organization (WHO) Global Health Observatory (GHO) data repository for Myanmar (Country Code:')} <code>{t('MMR')}</code>{t('), extracted via the official OData REST API.')} </p>
+          <div className="p-3 bg-[var(--c-surface-2)] rounded-[6px] border border-[var(--c-border)] font-mono text-[12px] text-[var(--c-ink)] overflow-x-auto"> {t('World Health Organization. (2024). Global Health Observatory Data Repository: Myanmar Country Statistics [Data set]. WHO. https://www.who.int/data/gho')} </div>
+          <p className="text-[12px] text-[var(--c-faint)]"> {t('Indicators indexed under SDG 3 (Good Health and Well-Being), WHO Global Tuberculosis Programme, WHO Global Malaria Programme, and the WHO/UNICEF Joint Monitoring Programme.')} </p>
         </div>
       </div>
     </div>

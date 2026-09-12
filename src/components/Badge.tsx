@@ -17,11 +17,11 @@ export const Badge: React.FC<BadgeProps> = ({
     size === 'sm' ? 'px-2 py-1 text-[11px]' : 'px-2.5 py-1.5 text-[12px]';
 
   const variantClasses = {
-    primary: 'bg-[#DDE4F5] text-[#1C4BBC] border border-[#CAD3E6]',
-    success: 'bg-[#EBF7F0] text-[#2F9E68] border border-[#BBE5D0]',
-    warning: 'bg-[#FCF5E8] text-[#C68A1E] border border-[#F2DEB0]',
-    danger: 'bg-[#FDF0EF] text-[#C4453F] border border-[#F4C5C2]',
-    neutral: 'bg-[#EDF1FA] text-[#60636A] border border-[#E4E9F2]',
+    primary: 'bg-[var(--c-subtle-2)] text-[var(--c-primary)] border border-[var(--c-border-strong)]',
+    success: 'bg-[var(--c-success-bg)] text-[var(--c-success)] border border-[var(--c-success-border)]',
+    warning: 'bg-[var(--c-warning-bg)] text-[var(--c-warning)] border border-[var(--c-warning-border)]',
+    danger: 'bg-[var(--c-danger-bg)] text-[var(--c-danger)] border border-[var(--c-danger-border)]',
+    neutral: 'bg-[var(--c-subtle)] text-[var(--c-muted)] border border-[var(--c-border)]',
   }[variant];
 
   return (
