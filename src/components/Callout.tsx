@@ -1,4 +1,5 @@
 import React from 'react';
+import { useI18n } from '../i18n/LocaleContext';
 import { AlertCircle, AlertTriangle, Info, CheckCircle2 } from 'lucide-react';
 
 interface CalloutProps {
@@ -14,6 +15,8 @@ export const Callout: React.FC<CalloutProps> = ({
   children,
   kicker,
 }) => {
+  const { t } = useI18n();
+
   const styles = {
     info: {
       bg: 'bg-[var(--c-subtle)]',
@@ -56,11 +59,11 @@ export const Callout: React.FC<CalloutProps> = ({
         <div className="flex-1 min-w-0">
           {kicker && (
             <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--c-muted)] mb-0.5">
-              {kicker}
+              {t(kicker)}
             </div>
           )}
           <h4 className={`text-[14px] font-semibold ${styles.title} mb-1`}>
-            {title}
+            {t(title)}
           </h4>
           <div className="text-[13px] text-[var(--c-ink)] leading-relaxed">
             {children}

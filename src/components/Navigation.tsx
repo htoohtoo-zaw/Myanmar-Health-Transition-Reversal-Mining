@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { NavigationPage } from '../types';
 import { ThemeToggle } from './ThemeToggle';
+import { LocaleToggle } from './LocaleToggle';
+import { useI18n } from '../i18n/LocaleContext';
 
 export interface NavigationProps {
   currentPage: NavigationPage;
@@ -41,6 +43,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   mobileOpen = false,
   onCloseMobile,
 }) => {
+  const { t } = useI18n();
   const handleSelect = (page: NavigationPage) => {
     if (onNavigate) {
       onNavigate(page);
@@ -81,7 +84,7 @@ export const Navigation: React.FC<NavigationProps> = ({
     <div className="mb-4">
       {title && (
         <div className="px-3 mb-1.5 text-[11px] font-semibold tracking-wider text-[var(--c-muted)] uppercase">
-          {title}
+          {t(title)}
         </div>
       )}
       <ul className="space-y-0.5">
@@ -106,7 +109,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                     strokeWidth={1.8}
                     className={isActive ? 'text-white shrink-0' : 'text-[var(--c-muted)] shrink-0'}
                   />
-                  <span className="truncate">{item.label}</span>
+                  <span className="truncate">{t(item.label)}</span>
                 </div>
                 {item.badge && (
                   <span
@@ -116,7 +119,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                         : 'bg-[var(--c-subtle-2)] text-[var(--c-primary)]'
                     }`}
                   >
-                    {item.badge}
+                    {t(item.badge)}
                   </span>
                 )}
               </button>
@@ -135,16 +138,10 @@ export const Navigation: React.FC<NavigationProps> = ({
           className="flex items-center gap-2.5 cursor-pointer"
           onClick={() => handleSelect('overview')}
         >
-          <div className="w-8 h-8 rounded-[6px] bg-[var(--c-primary)] flex items-center justify-center text-white font-bold text-[15px] shrink-0 shadow-xs">
-            MM
-          </div>
+          <div className="w-8 h-8 rounded-[6px] bg-[var(--c-primary)] flex items-center justify-center text-white font-bold text-[15px] shrink-0 shadow-xs"> {t('MM')} </div>
           <div>
-            <div className="text-[14px] font-bold text-[var(--c-ink)] leading-tight">
-              Myanmar Health
-            </div>
-            <div className="text-[11px] text-[var(--c-muted)]">
-              Transition & Reversal
-            </div>
+            <div className="text-[14px] font-bold text-[var(--c-ink)] leading-tight"> {t('Myanmar Health')} </div>
+            <div className="text-[11px] text-[var(--c-muted)]"> {t('Transition & Reversal')} </div>
           </div>
         </div>
 
@@ -153,7 +150,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             type="button"
             onClick={onCloseMobile}
             className="lg:hidden p-1.5 rounded-[6px] text-[var(--c-muted)] hover:text-[var(--c-ink)] hover:bg-[var(--c-subtle)]"
-            aria-label="Close menu"
+            aria-label={t('Close menu')}
           >
             <X size={18} />
           </button>
@@ -171,11 +168,9 @@ export const Navigation: React.FC<NavigationProps> = ({
       {/* Sidebar Footer Info */}
       <div className="p-3.5 border-t border-[var(--c-border)] bg-[var(--c-subtle)]/60 shrink-0">
         <div className="text-[11px] text-[var(--c-muted)] leading-relaxed">
-          <div className="font-medium text-[var(--c-ink)]">WHO GHO Dataset</div>
-          <div>20,613 records · 644 indicators</div>
-          <div className="text-[10px] text-[var(--c-faint)] mt-0.5">
-            CRISP-DM Mining Pipeline
-          </div>
+          <div className="font-medium text-[var(--c-ink)]">{t('WHO GHO Dataset')}</div>
+          <div>{t('20,613 records · 644 indicators')}</div>
+          <div className="text-[10px] text-[var(--c-faint)] mt-0.5"> {t('CRISP-DM Mining Pipeline')} </div>
         </div>
       </div>
     </div>
@@ -220,6 +215,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   onNavigate,
   onToggleMobile,
 }) => {
+  const { t } = useI18n();
   const pageTitles: Record<NavigationPage, { section: string; title: string }> = {
     overview: { section: 'Executive Overview', title: 'Health Transition & Reversal Summary' },
     'data-quality': { section: 'Data Understanding & Prep', title: 'Dataset Profile & Four Quality Traps' },
@@ -249,7 +245,7 @@ export const TopBar: React.FC<TopBarProps> = ({
             type="button"
             onClick={onToggleMobile}
             className="lg:hidden p-1.5 -ml-1 rounded-[6px] text-[var(--c-ink)] hover:bg-[var(--c-subtle)] border border-[var(--c-border-strong)]/60 cursor-pointer shrink-0"
-            aria-label="Toggle navigation menu"
+            aria-label={t('Toggle navigation menu')}
           >
             <Menu size={19} />
           </button>
@@ -257,11 +253,11 @@ export const TopBar: React.FC<TopBarProps> = ({
 
         <div className="flex items-center gap-1.5 text-[13px] min-w-0">
           <span className="text-[var(--c-muted)] font-medium hidden sm:inline truncate">
-            {meta.section}
+            {t(meta.section)}
           </span>
           <ChevronRight size={14} className="text-[var(--c-faint)] hidden sm:inline shrink-0" />
           <span className="text-[var(--c-ink)] font-semibold truncate">
-            {meta.title}
+            {t(meta.title)}
           </span>
         </div>
       </div>
@@ -273,26 +269,26 @@ export const TopBar: React.FC<TopBarProps> = ({
             value={currentPage}
             onChange={(e) => onNavigate(e.target.value as NavigationPage)}
             className="hidden md:block text-[12px] font-medium text-[var(--c-ink)] bg-[var(--c-subtle)] border border-[var(--c-border-strong)] rounded-[6px] px-2.5 py-1 focus:outline-hidden focus:ring-1 focus:ring-[var(--c-primary)] cursor-pointer"
-            aria-label="Quick jump to module"
+            aria-label={t('Quick jump to module')}
           >
-            <option value="overview">1. Overview</option>
-            <option value="data-quality">2. Dataset & 4 Traps</option>
-            <option value="raw-data">2b. Raw Data Explorer</option>
-            <option value="reversal">3. Reversal Detection</option>
-            <option value="clustering">4. Trajectory Clustering</option>
-            <option value="disease-levels">5. Disease Discretisation</option>
-            <option value="association-rules">6. Association Rules</option>
-            <option value="anomaly">7. Anomaly & Completeness</option>
-            <option value="synthesis">8. Cross-Method Synthesis</option>
-            <option value="model-performance">9. Model Performance</option>
-            <option value="predict">10. Interactive Predictor</option>
-            <option value="about">11. Methodology & Reference</option>
+            <option value="overview">{t('1. Overview')}</option>
+            <option value="data-quality">{t('2. Dataset & 4 Traps')}</option>
+            <option value="raw-data">{t('2b. Raw Data Explorer')}</option>
+            <option value="reversal">{t('3. Reversal Detection')}</option>
+            <option value="clustering">{t('4. Trajectory Clustering')}</option>
+            <option value="disease-levels">{t('5. Disease Discretisation')}</option>
+            <option value="association-rules">{t('6. Association Rules')}</option>
+            <option value="anomaly">{t('7. Anomaly & Completeness')}</option>
+            <option value="synthesis">{t('8. Cross-Method Synthesis')}</option>
+            <option value="model-performance">{t('9. Model Performance')}</option>
+            <option value="predict">{t('10. Interactive Predictor')}</option>
+            <option value="about">{t('11. Methodology & Reference')}</option>
           </select>
         )}
 
-        <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-[999px] text-[11px] sm:text-[12px] font-medium bg-[var(--c-subtle)] text-[var(--c-ink)] border border-[var(--c-border-strong)]">
-          1961–2030 · WHO GHO
-        </span>
+        <span className="hidden sm:inline-flex items-center px-2.5 py-1 rounded-[999px] text-[11px] sm:text-[12px] font-medium bg-[var(--c-subtle)] text-[var(--c-ink)] border border-[var(--c-border-strong)]"> {t('1961–2030 · WHO GHO')} </span>
+
+        <LocaleToggle />
 
         <ThemeToggle />
       </div>

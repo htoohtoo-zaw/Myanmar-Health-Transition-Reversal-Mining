@@ -31,12 +31,14 @@ import {
 } from '../data/miningData';
 import { NavigationPage } from '../types';
 import { useTheme } from '../theme/ThemeContext';
+import { useI18n } from '../i18n/LocaleContext';
 
 interface OverviewPageProps {
   onNavigate: (page: NavigationPage) => void;
 }
 
 export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
+  const { t } = useI18n();
   const { colors } = useTheme();
   const sortedDomains = [...DOMAINS].sort((a, b) => b.indicators - a.indicators);
 
@@ -44,12 +46,8 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
     <div className="space-y-6">
       {/* Page Title & Scope */}
       <div>
-        <h1 className="text-[28px] md:text-[32px] font-bold text-[var(--c-ink)] leading-tight">
-          Myanmar Health Transition & Reversal Analysis
-        </h1>
-        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl">
-          CRISP-DM data mining investigation into 60+ years of WHO Global Health Observatory indicators: discovering structural reversal breakpoints, trajectory archetypes, surveillance breakdowns, and machine learning risk alerts.
-        </p>
+        <h1 className="text-[28px] md:text-[32px] font-bold text-[var(--c-ink)] leading-tight"> {t('Myanmar Health Transition & Reversal Analysis')} </h1>
+        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl"> {t('CRISP-DM data mining investigation into 60+ years of WHO Global Health Observatory indicators: discovering structural reversal breakpoints, trajectory archetypes, surveillance breakdowns, and machine learning risk alerts.')} </p>
       </div>
 
       {/* 1. KPI Row (5 Cards) */}
@@ -90,22 +88,16 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
       {/* 2. Key-Finding Banner */}
       <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)] flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-[var(--c-danger)]">
         <div>
-          <div className="text-[11px] font-semibold text-[var(--c-danger)] uppercase tracking-wider mb-1">
-            CORE SYNTHESIS FINDING
-          </div>
-          <h2 className="text-[17px] font-bold text-[var(--c-ink)]">
-            Immunisation coverage halved and tuberculosis lost ~12 years of progress after 2020.
-          </h2>
-          <p className="text-[13px] text-[var(--c-muted)] mt-1">
-            Reversal detection, trajectory clustering, and anomaly scores independently converge on 2020–2021 as a compound health system fracture.
-          </p>
+          <div className="text-[11px] font-semibold text-[var(--c-danger)] uppercase tracking-wider mb-1"> {t('CORE SYNTHESIS FINDING')} </div>
+          <h2 className="text-[17px] font-bold text-[var(--c-ink)]"> {t('Immunisation coverage halved and tuberculosis lost ~12 years of progress after 2020.')} </h2>
+          <p className="text-[13px] text-[var(--c-muted)] mt-1"> {t('Reversal detection, trajectory clustering, and anomaly scores independently converge on 2020–2021 as a compound health system fracture.')} </p>
         </div>
         <button
           type="button"
           onClick={() => onNavigate('synthesis')}
           className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--c-primary)] hover:bg-[var(--c-primary-strong)] text-white text-[13px] font-semibold rounded-[6px] transition-colors shrink-0"
         >
-          <span>View Synthesis Timeline</span>
+          <span>{t('View Synthesis Timeline')}</span>
           <ArrowRight size={16} />
         </button>
       </div>
@@ -116,16 +108,10 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
         <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)] flex flex-col">
           <div className="flex items-center justify-between mb-2">
             <div>
-              <h3 className="text-[16px] font-semibold text-[var(--c-ink)]">
-                Routine Immunisation Coverage (2000–2024)
-              </h3>
-              <p className="text-[12px] text-[var(--c-muted)]">
-                Historical scale peak at 91% (2019) followed by abrupt halving to 44–45% in 2021
-              </p>
+              <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('Routine Immunisation Coverage (2000–2024)')} </h3>
+              <p className="text-[12px] text-[var(--c-muted)]"> {t('Historical scale peak at 91% (2019) followed by abrupt halving to 44–45% in 2021')} </p>
             </div>
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[var(--c-danger-bg)] text-[var(--c-danger)] border border-[var(--c-danger-border)]">
-              -50.5% Shock
-            </span>
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[var(--c-danger-bg)] text-[var(--c-danger)] border border-[var(--c-danger-border)]"> {t('-50.5% Shock')} </span>
           </div>
 
           <div className="h-[280px] w-full mt-2">
@@ -159,9 +145,8 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
             </ResponsiveContainer>
           </div>
           <div className="mt-3 pt-3 border-t border-[var(--c-border)] text-[12px] text-[var(--c-muted)] flex justify-between">
-            <span>Source: WHO/UNICEF Joint Reporting Forms (JRF)</span>
-            <button onClick={() => onNavigate('reversal')} className="text-[var(--c-primary)] font-medium hover:underline inline-flex items-center gap-1">
-              Explore Reversals <ArrowRight size={12} />
+            <span>{t('Source: WHO/UNICEF Joint Reporting Forms (JRF)')}</span>
+            <button onClick={() => onNavigate('reversal')} className="text-[var(--c-primary)] font-medium hover:underline inline-flex items-center gap-1"> {t('Explore Reversals')} <ArrowRight size={12} />
             </button>
           </div>
         </div>
@@ -170,16 +155,10 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
         <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)] flex flex-col">
           <div className="flex items-center justify-between mb-2">
             <div>
-              <h3 className="text-[16px] font-semibold text-[var(--c-ink)]">
-                Tuberculosis & Malaria Reversals (2000–2024)
-              </h3>
-              <p className="text-[12px] text-[var(--c-muted)]">
-                Post-2020 reversals: TB gained +11% incidence; Malaria incidence spiked +765%
-              </p>
+              <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('Tuberculosis & Malaria Reversals (2000–2024)')} </h3>
+              <p className="text-[12px] text-[var(--c-muted)]"> {t('Post-2020 reversals: TB gained +11% incidence; Malaria incidence spiked +765%')} </p>
             </div>
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[var(--c-warning-bg)] text-[var(--c-warning)] border border-[var(--c-warning-border)]">
-              Decade Reversal
-            </span>
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[var(--c-warning-bg)] text-[var(--c-warning)] border border-[var(--c-warning-border)]"> {t('Decade Reversal')} </span>
           </div>
 
           <div className="h-[280px] w-full mt-2">
@@ -227,9 +206,8 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
             </ResponsiveContainer>
           </div>
           <div className="mt-3 pt-3 border-t border-[var(--c-border)] text-[12px] text-[var(--c-muted)] flex justify-between">
-            <span>TB lost ~12.2 years of progress; Malaria +765% from 2019 low</span>
-            <button onClick={() => onNavigate('disease-levels')} className="text-[var(--c-primary)] font-medium hover:underline inline-flex items-center gap-1">
-              Disease Heatmap <ArrowRight size={12} />
+            <span>{t('TB lost ~12.2 years of progress; Malaria +765% from 2019 low')}</span>
+            <button onClick={() => onNavigate('disease-levels')} className="text-[var(--c-primary)] font-medium hover:underline inline-flex items-center gap-1"> {t('Disease Heatmap')} <ArrowRight size={12} />
             </button>
           </div>
         </div>
@@ -239,16 +217,10 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
       <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)]">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
           <div>
-            <h3 className="text-[16px] font-semibold text-[var(--c-ink)]">
-              WHO Domain Composition — Indicators per Domain
-            </h3>
-            <p className="text-[12px] text-[var(--c-muted)]">
-              Distribution of the 644 indicators across the 11 thematic public health domains
-            </p>
+            <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('WHO Domain Composition — Indicators per Domain')} </h3>
+            <p className="text-[12px] text-[var(--c-muted)]"> {t('Distribution of the 644 indicators across the 11 thematic public health domains')} </p>
           </div>
-          <div className="text-[11px] font-medium px-3 py-1 rounded bg-[var(--c-subtle)] text-[var(--c-primary)] border border-[var(--c-border-strong)]">
-            Key Trajectory Trap: Most indicators ≠ Most data (D8 vs D3)
-          </div>
+          <div className="text-[11px] font-medium px-3 py-1 rounded bg-[var(--c-subtle)] text-[var(--c-primary)] border border-[var(--c-border-strong)]"> {t('Key Trajectory Trap: Most indicators ≠ Most data (D8 vs D3)')} </div>
         </div>
 
         <div className="h-[260px] w-full">
@@ -281,16 +253,12 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <p className="mt-3 text-[12px] text-[var(--c-muted)] leading-relaxed italic border-t border-[var(--c-border)] pt-2">
-          Note: D8 (Health Systems & UHC) contains the highest indicator count (142), yet yields fewer deep longitudinal observations (15.1 obs/ind) compared to D3 (Communicable Diseases, 54.0 obs/ind) and D1 (Mortality, 52.6 obs/ind).
-        </p>
+        <p className="mt-3 text-[12px] text-[var(--c-muted)] leading-relaxed italic border-t border-[var(--c-border)] pt-2"> {t('Note: D8 (Health Systems & UHC) contains the highest indicator count (142), yet yields fewer deep longitudinal observations (15.1 obs/ind) compared to D3 (Communicable Diseases, 54.0 obs/ind) and D1 (Mortality, 52.6 obs/ind).')} </p>
       </div>
 
       {/* 5. Six Navigation Cards to Main Sections */}
       <div>
-        <h3 className="text-[16px] font-semibold text-[var(--c-ink)] mb-3">
-          Explore Mining Pipeline Modules
-        </h3>
+        <h3 className="text-[16px] font-semibold text-[var(--c-ink)] mb-3"> {t('Explore Mining Pipeline Modules')} </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div
             onClick={() => onNavigate('reversal')}
@@ -300,13 +268,9 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
               <div className="p-2 rounded-[6px] bg-[var(--c-subtle)] text-[var(--c-primary)] group-hover:bg-[var(--c-primary)] group-hover:text-white transition-colors">
                 <TrendingDown size={20} strokeWidth={1.75} />
               </div>
-              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors">
-                Reversal Detection
-              </h4>
+              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors"> {t('Reversal Detection')} </h4>
             </div>
-            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed">
-              Breakpoint identification and years-lost computation across 14 key indicators showing 3 major reversals.
-            </p>
+            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed"> {t('Breakpoint identification and years-lost computation across 14 key indicators showing 3 major reversals.')} </p>
           </div>
 
           <div
@@ -317,13 +281,9 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
               <div className="p-2 rounded-[6px] bg-[var(--c-subtle)] text-[var(--c-primary)] group-hover:bg-[var(--c-primary)] group-hover:text-white transition-colors">
                 <GitFork size={20} strokeWidth={1.75} />
               </div>
-              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors">
-                Trajectory Clustering
-              </h4>
+              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors"> {t('Trajectory Clustering')} </h4>
             </div>
-            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed">
-              DTW distance matrix & Ward dendrogram splitting time-series into 3 behavioral archetypes (ARI = 0.072).
-            </p>
+            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed"> {t('DTW distance matrix & Ward dendrogram splitting time-series into 3 behavioral archetypes (ARI = 0.072).')} </p>
           </div>
 
           <div
@@ -334,13 +294,9 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
               <div className="p-2 rounded-[6px] bg-[var(--c-subtle)] text-[var(--c-primary)] group-hover:bg-[var(--c-primary)] group-hover:text-white transition-colors">
                 <Layers size={20} strokeWidth={1.75} />
               </div>
-              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors">
-                Disease Levels (L/M/H)
-              </h4>
+              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors"> {t('Disease Levels (L/M/H)')} </h4>
             </div>
-            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed">
-              Discretisation across 9 diseases × 25 years with interactive method switching (Tercile, Epi, SD).
-            </p>
+            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed"> {t('Discretisation across 9 diseases × 25 years with interactive method switching (Tercile, Epi, SD).')} </p>
           </div>
 
           <div
@@ -351,13 +307,9 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
               <div className="p-2 rounded-[6px] bg-[var(--c-subtle)] text-[var(--c-primary)] group-hover:bg-[var(--c-primary)] group-hover:text-white transition-colors">
                 <Network size={20} strokeWidth={1.75} />
               </div>
-              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors">
-                Association Rules
-              </h4>
+              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors"> {t('Association Rules')} </h4>
             </div>
-            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed">
-              Lagged apriori rules between immunisation and disease incidence, exposing co-trending confounds.
-            </p>
+            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed"> {t('Lagged apriori rules between immunisation and disease incidence, exposing co-trending confounds.')} </p>
           </div>
 
           <div
@@ -368,13 +320,9 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
               <div className="p-2 rounded-[6px] bg-[var(--c-subtle)] text-[var(--c-primary)] group-hover:bg-[var(--c-primary)] group-hover:text-white transition-colors">
                 <AlertTriangle size={20} strokeWidth={1.75} />
               </div>
-              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors">
-                Anomaly & Surveillance
-              </h4>
+              <h4 className="text-[15px] font-semibold text-[var(--c-ink)] group-hover:text-[var(--c-primary)] transition-colors"> {t('Anomaly & Surveillance')} </h4>
             </div>
-            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed">
-              Isolation Forest scores by year and surveillance completeness drop vs real epidemiological decline.
-            </p>
+            <p className="text-[12px] text-[var(--c-muted)] leading-relaxed"> {t('Isolation Forest scores by year and surveillance completeness drop vs real epidemiological decline.')} </p>
           </div>
 
           <div
@@ -386,17 +334,11 @@ export const OverviewPage: React.FC<OverviewPageProps> = ({ onNavigate }) => {
                 <Sliders size={20} strokeWidth={1.75} />
               </div>
               <div className="flex items-center gap-2">
-                <h4 className="text-[15px] font-semibold text-[var(--c-primary)]">
-                  Predict Deterioration Risk
-                </h4>
-                <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[var(--c-primary)] text-white">
-                  Live Tool
-                </span>
+                <h4 className="text-[15px] font-semibold text-[var(--c-primary)]"> {t('Predict Deterioration Risk')} </h4>
+                <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[var(--c-primary)] text-white"> {t('Live Tool')} </span>
               </div>
             </div>
-            <p className="text-[12px] text-[var(--c-ink)] leading-relaxed">
-              Run the trained Random Forest model (4.4× lift, 0.499 threshold) in Quick Predict or Advanced mode.
-            </p>
+            <p className="text-[12px] text-[var(--c-ink)] leading-relaxed"> {t('Run the trained Random Forest model (4.4× lift, 0.499 threshold) in Quick Predict or Advanced mode.')} </p>
           </div>
         </div>
       </div>

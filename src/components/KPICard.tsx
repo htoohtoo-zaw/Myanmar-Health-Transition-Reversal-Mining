@@ -1,4 +1,5 @@
 import React from 'react';
+import { useI18n } from '../i18n/LocaleContext';
 
 interface KPICardProps {
   label: string;
@@ -18,16 +19,18 @@ export const KPICard: React.FC<KPICardProps> = ({
   kicker,
   badge,
 }) => {
+  const { t } = useI18n();
+
   return (
     <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)] flex flex-col justify-between">
       <div>
         <div className="flex items-center justify-between gap-2 mb-1">
           {kicker ? (
             <span className="text-[11px] font-semibold tracking-wider text-[var(--c-muted)] uppercase">
-              {kicker}
+              {t(kicker)}
             </span>
           ) : (
-            <span className="text-[13px] font-medium text-[var(--c-muted)]">{label}</span>
+            <span className="text-[13px] font-medium text-[var(--c-muted)]">{t(label)}</span>
           )}
           {badge && (
             <span
@@ -41,7 +44,7 @@ export const KPICard: React.FC<KPICardProps> = ({
                   : 'bg-[var(--c-danger-bg)] text-[var(--c-danger)]'
               }`}
             >
-              {badge.text}
+              {t(badge.text)}
             </span>
           )}
         </div>
@@ -54,7 +57,7 @@ export const KPICard: React.FC<KPICardProps> = ({
         </div>
         {subtext && (
           <p className="mt-2 text-[12px] text-[var(--c-muted)] leading-relaxed">
-            {subtext}
+            {t(subtext)}
           </p>
         )}
       </div>

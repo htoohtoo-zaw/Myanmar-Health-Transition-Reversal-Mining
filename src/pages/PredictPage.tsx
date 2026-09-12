@@ -43,8 +43,10 @@ import {
   PredictionResult,
 } from '../types';
 import { useTheme } from '../theme/ThemeContext';
+import { useI18n } from '../i18n/LocaleContext';
 
 export const PredictPage: React.FC = () => {
+  const { t } = useI18n();
   const { colors } = useTheme();
   const [mode, setMode] = useState<'quick' | 'advanced'>('quick');
 
@@ -169,12 +171,8 @@ export const PredictPage: React.FC = () => {
     <div className="space-y-6">
       {/* Title */}
       <div>
-        <h1 className="text-[26px] md:text-[30px] font-bold text-[var(--c-ink)]">
-          Interactive Deterioration Risk Prediction Tool
-        </h1>
-        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl">
-          Real-time execution of the trained Random Forest classifier (decision threshold = 0.499, base rate = 7.2%). Forecast whether a specific health indicator is likely to experience severe deterioration next year.
-        </p>
+        <h1 className="text-[26px] md:text-[30px] font-bold text-[var(--c-ink)]"> {t('Interactive Deterioration Risk Prediction Tool')} </h1>
+        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl"> {t('Real-time execution of the trained Random Forest classifier (decision threshold = 0.499, base rate = 7.2%). Forecast whether a specific health indicator is likely to experience severe deterioration next year.')} </p>
       </div>
 
       {/* Mode Switcher Banner (§5.1) */}
@@ -184,8 +182,7 @@ export const PredictPage: React.FC = () => {
             <Sliders size={18} strokeWidth={1.75} />
           </div>
           <div>
-            <div className="text-[14px] font-bold text-[var(--c-ink)]">
-              Prediction Operation Mode: {mode === 'quick' ? 'Quick Predict' : 'Advanced / What-If'}
+            <div className="text-[14px] font-bold text-[var(--c-ink)]"> {t('Prediction Operation Mode:')} {mode === 'quick' ? 'Quick Predict' : 'Advanced / What-If'}
             </div>
             <div className="text-[12px] text-[var(--c-muted)]">
               {mode === 'quick'
@@ -204,9 +201,7 @@ export const PredictPage: React.FC = () => {
                 ? 'bg-[var(--c-surface)] text-[var(--c-primary)] shadow-sm'
                 : 'text-[var(--c-muted)] hover:text-[var(--c-ink)]'
             }`}
-          >
-            Quick Predict
-          </button>
+          > {t('Quick Predict')} </button>
           <button
             type="button"
             onClick={handleSwitchToAdvanced}
@@ -215,9 +210,7 @@ export const PredictPage: React.FC = () => {
                 ? 'bg-[var(--c-surface)] text-[var(--c-primary)] shadow-sm'
                 : 'text-[var(--c-muted)] hover:text-[var(--c-ink)]'
             }`}
-          >
-            Advanced / What-If
-          </button>
+          > {t('Advanced / What-If')} </button>
         </div>
       </div>
 
@@ -229,22 +222,16 @@ export const PredictPage: React.FC = () => {
             /* Quick Predict Mode Form (§5.2) */
             <div className="space-y-4">
               <div className="border-b border-[var(--c-border)] pb-3">
-                <h3 className="text-[16px] font-semibold text-[var(--c-ink)]">
-                  1. Select Indicator & Observation Horizon
-                </h3>
-                <p className="text-[12px] text-[var(--c-muted)]">
-                  Restricted to the 157 distinct indicators (300 series) with sufficient historical depth for lag/slope engineering
-                </p>
+                <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('1. Select Indicator & Observation Horizon')} </h3>
+                <p className="text-[12px] text-[var(--c-muted)]"> {t('Restricted to the 157 distinct indicators (300 series) with sufficient historical depth for lag/slope engineering')} </p>
               </div>
 
               {/* Indicator Search & Dropdown */}
               <div>
-                <label className="block text-[12px] font-semibold text-[var(--c-ink)] mb-1">
-                  Health Indicator (Grouped by Domain)
-                </label>
+                <label className="block text-[12px] font-semibold text-[var(--c-ink)] mb-1"> {t('Health Indicator (Grouped by Domain)')} </label>
                 <input
                   type="text"
-                  placeholder="Type to filter indicators..."
+                  placeholder={t('Type to filter indicators...')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full px-3 py-1.5 text-[12px] border border-[var(--c-border-strong)] rounded-[6px] mb-2 focus:outline-none focus:ring-2 focus:ring-[var(--c-primary)]"
@@ -262,25 +249,22 @@ export const PredictPage: React.FC = () => {
                 >
                   {filteredIndicators.map((ind) => (
                     <option key={ind.id} value={ind.id}>
-                      [{ind.domainName.split(' ')[0]}] {ind.name} ({ind.breakdown})
+                      [{ind.domainName.split(' ')[0]}] {t(ind.name)} ({t(ind.breakdown)})
                     </option>
                   ))}
                 </select>
                 <div className="mt-1 text-[11px] text-[var(--c-muted)] flex justify-between">
-                  <span>Domain: {currentIndicator.domainName}</span>
-                  <span>Unit: {currentIndicator.unit}</span>
+                  <span>{t('Domain:')} {t(currentIndicator.domainName)}</span>
+                  <span>{t('Unit:')} {t(currentIndicator.unit)}</span>
                 </div>
               </div>
 
               {/* Breakdown Dimension */}
               <div>
-                <label className="block text-[12px] font-semibold text-[var(--c-ink)] mb-1">
-                  Disaggregation Breakdown
-                </label>
+                <label className="block text-[12px] font-semibold text-[var(--c-ink)] mb-1"> {t('Disaggregation Breakdown')} </label>
                 <div className="px-3 py-2 text-[13px] rounded-[6px] bg-[var(--c-subtle)] text-[var(--c-ink)] border border-[var(--c-border-strong)] flex justify-between items-center font-mono">
-                  <span>{currentIndicator.breakdown}</span>
-                  <span className="text-[11px] text-[var(--c-muted)]">
-                    Dim: {currentIndicator.dimType}
+                  <span>{t(currentIndicator.breakdown)}</span>
+                  <span className="text-[11px] text-[var(--c-muted)]"> {t('Dim:')} {t(currentIndicator.dimType)}
                   </span>
                 </div>
               </div>
@@ -288,9 +272,7 @@ export const PredictPage: React.FC = () => {
               {/* Target Year & Future Horizon Selector */}
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="block text-[12px] font-semibold text-[var(--c-ink)]">
-                    Evaluation / Forecast Horizon Year
-                  </label>
+                  <label className="block text-[12px] font-semibold text-[var(--c-ink)]"> {t('Evaluation / Forecast Horizon Year')} </label>
                   <span className="text-[11px] font-medium text-[var(--c-primary)] flex items-center gap-1">
                     <Sparkles size={12} />
                     {selectedYear >= 2024 ? 'Future Horizon Mode' : 'Back-Test Mode'}
@@ -299,7 +281,7 @@ export const PredictPage: React.FC = () => {
 
                 {/* Quick Selection Shortcuts */}
                 <div className="flex flex-wrap items-center gap-1.5 mb-2">
-                  <span className="text-[11px] text-[var(--c-muted)]">Quick Set:</span>
+                  <span className="text-[11px] text-[var(--c-muted)]">{t('Quick Set:')}</span>
                   {[2026, 2027, 2030, 2023].map((yr) => {
                     const isSel = selectedYear === yr;
                     return (
@@ -325,13 +307,13 @@ export const PredictPage: React.FC = () => {
                   className="w-full px-3 py-2 text-[13px] border border-[var(--c-border-strong)] rounded-[6px] bg-[var(--c-surface)] text-[var(--c-ink)] focus:outline-none focus:ring-2 focus:ring-[var(--c-primary)] font-mono"
                 >
                   <optgroup label="🔮 Future Forecast Horizons (Extrapolation)">
-                    <option value={2026}>2026 (Forward Horizon +3y)</option>
-                    <option value={2027}>2027 (Forward Horizon +4y)</option>
-                    <option value={2028}>2028 (Forward Horizon +5y)</option>
-                    <option value={2029}>2029 (Forward Horizon +6y)</option>
-                    <option value={2030}>2030 (SDG 2030 Target Milestone)</option>
-                    <option value={2025}>2025 (Forward Horizon +2y)</option>
-                    <option value={2024}>2024 (Forward Horizon +1y)</option>
+                    <option value={2026}>{t('2026 (Forward Horizon +3y)')}</option>
+                    <option value={2027}>{t('2027 (Forward Horizon +4y)')}</option>
+                    <option value={2028}>{t('2028 (Forward Horizon +5y)')}</option>
+                    <option value={2029}>{t('2029 (Forward Horizon +6y)')}</option>
+                    <option value={2030}>{t('2030 (SDG 2030 Target Milestone)')}</option>
+                    <option value={2025}>{t('2025 (Forward Horizon +2y)')}</option>
+                    <option value={2024}>{t('2024 (Forward Horizon +1y)')}</option>
                   </optgroup>
 
                   <optgroup label="📋 Historical Observations (Empirical Back-Test)">
@@ -354,11 +336,9 @@ export const PredictPage: React.FC = () => {
                 {selectedYear >= 2024 ? (
                   <div className="mt-3 p-3 bg-[var(--c-subtle)]/80 border border-[var(--c-border-strong)] rounded-[6px] space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-semibold text-[var(--c-ink)] uppercase tracking-wider">
-                        Future Projection Scenario (2024–{selectedYear})
+                      <span className="text-[11px] font-semibold text-[var(--c-ink)] uppercase tracking-wider"> {t('Future Projection Scenario (2024–')}{selectedYear})
                       </span>
-                      <span className="text-[10px] text-[var(--c-muted)] font-mono">
-                        Base: {currentIndicator.latestYear || 2023}
+                      <span className="text-[10px] text-[var(--c-muted)] font-mono"> {t('Base:')} {currentIndicator.latestYear || 2023}
                       </span>
                     </div>
 
@@ -378,19 +358,15 @@ export const PredictPage: React.FC = () => {
                               : 'bg-[var(--c-surface)]/60 text-[var(--c-muted)] border-[var(--c-border-strong)] hover:bg-[var(--c-surface)] text-[11px]'
                           }`}
                         >
-                          <div className="text-[11px]">{sc.label}</div>
+                          <div className="text-[11px]">{t(sc.label)}</div>
                           <div className="text-[9px] text-[var(--c-faint)]">{sc.desc}</div>
                         </button>
                       ))}
                     </div>
-                    <p className="text-[11px] text-[var(--c-muted)] leading-tight">
-                      Autoregressively compounds the {futureScenario} trajectory from {currentIndicator.latestYear || 2023} into {selectedYear} to compute rolling features.
-                    </p>
+                    <p className="text-[11px] text-[var(--c-muted)] leading-tight"> {t('Autoregressively compounds the')} {futureScenario} {t('trajectory from')} {currentIndicator.latestYear || 2023} {t('into')} {selectedYear} {t('to compute rolling features.')} </p>
                   </div>
                 ) : (
-                  <p className="text-[11px] text-[var(--c-muted)] mt-1">
-                    The model extracts 4 lags, 3-year volatility, and 5-year trend slope prior to this year.
-                  </p>
+                  <p className="text-[11px] text-[var(--c-muted)] mt-1"> {t('The model extracts 4 lags, 3-year volatility, and 5-year trend slope prior to this year.')} </p>
                 )}
               </div>
 
@@ -405,11 +381,11 @@ export const PredictPage: React.FC = () => {
                   {isLoading ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      <span>Predicting...</span>
+                      <span>{t('Predicting...')}</span>
                     </>
                   ) : (
                     <>
-                      <span>Predict Deterioration Risk</span>
+                      <span>{t('Predict Deterioration Risk')}</span>
                       <ArrowRight size={16} />
                     </>
                   )}
@@ -421,28 +397,21 @@ export const PredictPage: React.FC = () => {
             <div className="space-y-4">
               <div className="flex items-center justify-between border-b border-[var(--c-border)] pb-3">
                 <div>
-                  <h3 className="text-[16px] font-semibold text-[var(--c-ink)]">
-                    Direct Engineered Feature Inputs
-                  </h3>
-                  <p className="text-[12px] text-[var(--c-muted)]">
-                    Interquartile ranges (IQR) pre-configured with numeric overrides
-                  </p>
+                  <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('Direct Engineered Feature Inputs')} </h3>
+                  <p className="text-[12px] text-[var(--c-muted)]"> {t('Interquartile ranges (IQR) pre-configured with numeric overrides')} </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleSwitchToAdvanced()}
                   className="text-[12px] text-[var(--c-primary)] font-semibold hover:underline flex items-center gap-1"
                 >
-                  <RotateCcw size={12} /> Reset from Quick
-                </button>
+                  <RotateCcw size={12} /> {t('Reset from Quick')} </button>
               </div>
 
               {/* Target Horizon Year for Advanced Simulation */}
               <div className="p-3 bg-[var(--c-subtle)]/60 rounded-[6px] border border-[var(--c-border-strong)] space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-[12px] font-semibold text-[var(--c-ink)]">
-                    Simulated Target Horizon Year
-                  </label>
+                  <label className="text-[12px] font-semibold text-[var(--c-ink)]"> {t('Simulated Target Horizon Year')} </label>
                   <span className="text-[11px] font-mono text-[var(--c-primary)] font-bold">
                     {advTargetYear >= 2024 ? `🔮 ${advTargetYear} Horizon` : `${advTargetYear} Historical`}
                   </span>
@@ -483,9 +452,7 @@ export const PredictPage: React.FC = () => {
                 {/* 5-year Slope */}
                 <div>
                   <div className="flex justify-between text-[12px] mb-1">
-                    <span className="font-semibold text-[var(--c-ink)]">
-                      slope5 (5-year linear slope)
-                    </span>
+                    <span className="font-semibold text-[var(--c-ink)]"> {t('slope5 (5-year linear slope)')} </span>
                     <span className="font-mono text-[var(--c-primary)] font-bold">
                       {advFeatures.slope5.toFixed(2)}
                     </span>
@@ -502,18 +469,16 @@ export const PredictPage: React.FC = () => {
                     className="w-full accent-[var(--c-primary)]"
                   />
                   <div className="flex justify-between text-[10px] text-[var(--c-muted)]">
-                    <span>Declining (-1.5)</span>
-                    <span>Flat (0.0)</span>
-                    <span>Worsening (+1.5)</span>
+                    <span>{t('Declining (-1.5)')}</span>
+                    <span>{t('Flat (0.0)')}</span>
+                    <span>{t('Worsening (+1.5)')}</span>
                   </div>
                 </div>
 
                 {/* 3-year Volatility roll_std3 */}
                 <div>
                   <div className="flex justify-between text-[12px] mb-1">
-                    <span className="font-semibold text-[var(--c-ink)]">
-                      roll_std3 (3-year rolling volatility)
-                    </span>
+                    <span className="font-semibold text-[var(--c-ink)]"> {t('roll_std3 (3-year rolling volatility)')} </span>
                     <span className="font-mono text-[var(--c-primary)] font-bold">
                       {advFeatures.roll_std3.toFixed(2)}
                     </span>
@@ -534,9 +499,7 @@ export const PredictPage: React.FC = () => {
                 {/* 1-year Delta1 */}
                 <div>
                   <div className="flex justify-between text-[12px] mb-1">
-                    <span className="font-semibold text-[var(--c-ink)]">
-                      delta1 (1-year velocity shift: z0 - z1)
-                    </span>
+                    <span className="font-semibold text-[var(--c-ink)]"> {t('delta1 (1-year velocity shift: z0 - z1)')} </span>
                     <span className="font-mono text-[var(--c-primary)] font-bold">
                       {advFeatures.delta1.toFixed(2)}
                     </span>
@@ -557,9 +520,7 @@ export const PredictPage: React.FC = () => {
                 {/* z_lag0 Current Z-Score */}
                 <div>
                   <div className="flex justify-between text-[12px] mb-1">
-                    <span className="font-semibold text-[var(--c-ink)]">
-                      z_lag0 (Current normalized z-score)
-                    </span>
+                    <span className="font-semibold text-[var(--c-ink)]"> {t('z_lag0 (Current normalized z-score)')} </span>
                     <span className="font-mono text-[var(--c-primary)] font-bold">
                       {advFeatures.z_lag0.toFixed(2)}
                     </span>
@@ -579,9 +540,7 @@ export const PredictPage: React.FC = () => {
 
                 {/* Level Now Segmented Control */}
                 <div>
-                  <label className="block text-[12px] font-semibold text-[var(--c-ink)] mb-1">
-                    level_now (Discretised Current Burden Tier)
-                  </label>
+                  <label className="block text-[12px] font-semibold text-[var(--c-ink)] mb-1"> {t('level_now (Discretised Current Burden Tier)')} </label>
                   <div className="grid grid-cols-3 gap-1.5 p-1 bg-[var(--c-subtle)] rounded-[6px]">
                     {(['Low', 'Mid', 'High'] as const).map((lvl) => (
                       <button
@@ -603,9 +562,7 @@ export const PredictPage: React.FC = () => {
                 {/* Acceleration */}
                 <div>
                   <div className="flex justify-between text-[12px] mb-1">
-                    <span className="font-semibold text-[var(--c-ink)]">
-                      accel (Velocity acceleration: delta1 - delta2)
-                    </span>
+                    <span className="font-semibold text-[var(--c-ink)]"> {t('accel (Velocity acceleration: delta1 - delta2)')} </span>
                     <span className="font-mono text-[var(--c-primary)] font-bold">
                       {advFeatures.accel.toFixed(2)}
                     </span>
@@ -635,11 +592,11 @@ export const PredictPage: React.FC = () => {
                   {isLoading ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      <span>Predicting...</span>
+                      <span>{t('Predicting...')}</span>
                     </>
                   ) : (
                     <>
-                      <span>Score Advanced Inputs</span>
+                      <span>{t('Score Advanced Inputs')}</span>
                       <ArrowRight size={16} />
                     </>
                   )}
@@ -651,7 +608,7 @@ export const PredictPage: React.FC = () => {
           {/* Error Display if any */}
           {errorMsg && (
             <div className="p-3 bg-[var(--c-danger-bg)] border-l-4 border-l-[var(--c-danger)] border-[var(--c-danger-border)] rounded-[6px] text-[12px] text-[var(--c-danger)]">
-              <strong>Configuration Note:</strong> {errorMsg}
+              <strong>{t('Configuration Note:')}</strong> {errorMsg}
             </div>
           )}
         </div>
@@ -660,12 +617,8 @@ export const PredictPage: React.FC = () => {
         <div className="lg:col-span-6 bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)] space-y-4">
           <div className="border-b border-[var(--c-border)] pb-3 flex items-center justify-between">
             <div>
-              <h3 className="text-[16px] font-semibold text-[var(--c-ink)]">
-                Model Prediction Result
-              </h3>
-              <p className="text-[12px] text-[var(--c-muted)]">
-                Statistical probability of season-ahead deterioration
-              </p>
+              <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('Model Prediction Result')} </h3>
+              <p className="text-[12px] text-[var(--c-muted)]"> {t('Statistical probability of season-ahead deterioration')} </p>
             </div>
             {predictionResult && (
               <Badge
@@ -686,12 +639,10 @@ export const PredictPage: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <Sparkles size={16} className="shrink-0 text-[var(--c-primary)]" />
                     <div>
-                      <span className="font-bold text-[var(--c-ink)]">
-                        Target Forecast Horizon: Year {predictionResult.forecastYear}
+                      <span className="font-bold text-[var(--c-ink)]"> {t('Target Forecast Horizon: Year')} {predictionResult.forecastYear}
                       </span>
                       <span className="text-[11px] text-[var(--c-muted)] ml-2">
-                        ({predictionResult.forecastYear! - 2023} years beyond 2023 empirical baseline)
-                      </span>
+                        ({predictionResult.forecastYear! - 2023} {t('years beyond 2023 empirical baseline)')} </span>
                     </div>
                   </div>
                   {predictionResult.scenario && (
@@ -705,31 +656,27 @@ export const PredictPage: React.FC = () => {
               {/* Score & Band */}
               <div className="flex items-baseline justify-between p-4 rounded-[8px] bg-[var(--c-subtle)]/70 border border-[var(--c-border-strong)]">
                 <div>
-                  <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--c-muted)]">
-                    Deterioration Probability
-                  </div>
+                  <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--c-muted)]"> {t('Deterioration Probability')} </div>
                   <div className="text-[44px] font-bold text-[var(--c-ink)] font-mono tabular-nums leading-none mt-1">
                     {(predictionResult.probability * 100).toFixed(1)}%
                   </div>
                   <div className="text-[12px] font-semibold text-[var(--c-primary)] mt-2">
-                    {predictionResult.bandLabel}
+                    {t(predictionResult.bandLabel)}
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <div className="text-[11px] text-[var(--c-muted)]">Decision Threshold</div>
+                  <div className="text-[11px] text-[var(--c-muted)]">{t('Decision Threshold')}</div>
                   <div className="text-[16px] font-mono font-bold text-[var(--c-ink)]">
                     {(predictionResult.threshold * 100).toFixed(1)}%
                   </div>
-                  <div className="text-[11px] text-[var(--c-muted)] mt-1">Base Rate: 7.2%</div>
+                  <div className="text-[11px] text-[var(--c-muted)] mt-1">{t('Base Rate: 7.2%')}</div>
                 </div>
               </div>
 
               {/* Explanations: Plain Language Bullets (§5.5) */}
               <div>
-                <h4 className="text-[13px] font-semibold text-[var(--c-ink)] mb-2">
-                  Signal Contributors & Risk Drivers:
-                </h4>
+                <h4 className="text-[13px] font-semibold text-[var(--c-ink)] mb-2"> {t('Signal Contributors & Risk Drivers:')} </h4>
                 <ul className="space-y-1.5">
                   {predictionResult.explanation.map((exp, i) => (
                     <li
@@ -796,14 +743,12 @@ export const PredictPage: React.FC = () => {
 
               {/* Reliability Context Callout (§5.5) */}
               <div className="p-3 rounded-[6px] bg-[var(--c-subtle)] border border-[var(--c-border-strong)] text-[12px] text-[var(--c-ink)]">
-                <strong>Reliability Context: </strong>
-                {predictionResult.reliabilityNote}
+                <strong>{t('Reliability Context:')} </strong>
+                {t(predictionResult.reliabilityNote)}
               </div>
 
               {/* Mandatory Disclaimer (§5.5) */}
-              <p className="text-[11px] text-[var(--c-faint)] leading-relaxed italic border-t border-[var(--c-border)] pt-2">
-                Disclaimer: This is a statistical pattern match on the indicator's own historical trajectory, not a medical or causal diagnosis. Historical deterioration rate in the test period was 7.2%.
-              </p>
+              <p className="text-[11px] text-[var(--c-faint)] leading-relaxed italic border-t border-[var(--c-border)] pt-2"> {t('Disclaimer: This is a statistical pattern match on the indicator\'s own historical trajectory, not a medical or causal diagnosis. Historical deterioration rate in the test period was 7.2%.')} </p>
             </div>
           ) : (
             /* Idle State */
@@ -811,12 +756,8 @@ export const PredictPage: React.FC = () => {
               <div className="w-12 h-12 rounded-full bg-[var(--c-subtle)] text-[var(--c-primary)] flex items-center justify-center mx-auto">
                 <Sliders size={22} strokeWidth={1.75} />
               </div>
-              <h4 className="text-[15px] font-semibold text-[var(--c-ink)]">
-                Model Awaiting Input
-              </h4>
-              <p className="text-[13px] text-[var(--c-muted)] max-w-sm mx-auto">
-                Select an indicator and year on the left, then click <strong>Predict Deterioration Risk</strong> to evaluate the Random Forest model.
-              </p>
+              <h4 className="text-[15px] font-semibold text-[var(--c-ink)]"> {t('Model Awaiting Input')} </h4>
+              <p className="text-[13px] text-[var(--c-muted)] max-w-sm mx-auto"> {t('Select an indicator and year on the left, then click')} <strong>{t('Predict Deterioration Risk')}</strong> {t('to evaluate the Random Forest model.')} </p>
             </div>
           )}
         </div>

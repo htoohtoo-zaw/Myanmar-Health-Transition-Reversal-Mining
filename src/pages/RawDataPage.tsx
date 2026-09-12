@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { Badge } from '../components/Badge';
 import { loadRawDataset, RawRow, RAW_DATASET_PATH } from '../data/rawDataset';
+import { useI18n } from '../i18n/LocaleContext';
 
 type SortKey = 'code' | 'indicator' | 'year' | 'dimensionName' | 'value';
 type ValueFilter = 'all' | 'numeric' | 'categorical';
@@ -19,6 +20,7 @@ type ValueFilter = 'all' | 'numeric' | 'categorical';
 const PAGE_SIZE = 50;
 
 export const RawDataPage: React.FC = () => {
+  const { t } = useI18n();
   const [rows, setRows] = useState<RawRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -148,20 +150,15 @@ export const RawDataPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-[26px] md:text-[30px] font-bold text-[var(--c-ink)]">
-          Raw Data Explorer
-        </h1>
-        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl">
-          Browse the complete WHO Global Health Observatory export for Myanmar exactly as retrieved —
-          every observation behind the analyses on this site, before any cleansing was applied.
-        </p>
+        <h1 className="text-[26px] md:text-[30px] font-bold text-[var(--c-ink)]"> {t('Raw Data Explorer')} </h1>
+        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl"> {t('Browse the complete WHO Global Health Observatory export for Myanmar exactly as retrieved — every observation behind the analyses on this site, before any cleansing was applied.')} </p>
       </div>
 
       {error && (
         <div className="bg-[var(--c-danger-bg)] border border-[var(--c-danger-border)] rounded-[8px] p-4 flex items-start gap-3">
           <AlertTriangle size={18} className="text-[var(--c-danger)] mt-0.5 shrink-0" />
           <div>
-            <h4 className="text-[14px] font-semibold text-[var(--c-danger)]">Could not load the dataset</h4>
+            <h4 className="text-[14px] font-semibold text-[var(--c-danger)]">{t('Could not load the dataset')}</h4>
             <p className="text-[13px] text-[var(--c-ink)] mt-0.5">{error}</p>
           </div>
         </div>
@@ -170,9 +167,7 @@ export const RawDataPage: React.FC = () => {
       {!rows && !error && (
         <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-10 flex flex-col items-center justify-center gap-3">
           <Loader2 size={22} className="text-[var(--c-primary)] animate-spin" />
-          <p className="text-[13px] text-[var(--c-muted)]">
-            Loading 20,613 observations (6.5 MB)…
-          </p>
+          <p className="text-[13px] text-[var(--c-muted)]"> {t('Loading 20,613 observations (6.5 MB)…')} </p>
         </div>
       )}
 
@@ -190,9 +185,9 @@ export const RawDataPage: React.FC = () => {
                   type="search"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search indicator, GHO code, dimension or value…"
+                  placeholder={t('Search indicator, GHO code, dimension or value…')}
                   className="w-full pl-9 pr-3 py-2 text-[13px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] focus:outline-hidden focus:ring-1 focus:ring-[var(--c-primary)]"
-                  aria-label="Search the dataset"
+                  aria-label={t('Search the dataset')}
                 />
               </div>
 
@@ -201,9 +196,7 @@ export const RawDataPage: React.FC = () => {
                 download
                 className="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-[6px] bg-[var(--c-primary)] text-white text-[13px] font-medium shrink-0 hover:bg-[var(--c-primary-hover)] transition-colors"
               >
-                <Download size={15} strokeWidth={2} />
-                Download CSV
-              </a>
+                <Download size={15} strokeWidth={2} /> {t('Download CSV')} </a>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
@@ -211,9 +204,9 @@ export const RawDataPage: React.FC = () => {
                 value={yearFrom}
                 onChange={(e) => setYearFrom(e.target.value === '' ? '' : Number(e.target.value))}
                 className="text-[12px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] px-2 py-1.5 cursor-pointer"
-                aria-label="Filter from year"
+                aria-label={t('Filter from year')}
               >
-                <option value="">Year from…</option>
+                <option value="">{t('Year from…')}</option>
                 {years.map((y) => (
                   <option key={y} value={y}>{y}</option>
                 ))}
@@ -223,9 +216,9 @@ export const RawDataPage: React.FC = () => {
                 value={yearTo}
                 onChange={(e) => setYearTo(e.target.value === '' ? '' : Number(e.target.value))}
                 className="text-[12px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] px-2 py-1.5 cursor-pointer"
-                aria-label="Filter to year"
+                aria-label={t('Filter to year')}
               >
-                <option value="">Year to…</option>
+                <option value="">{t('Year to…')}</option>
                 {years.map((y) => (
                   <option key={y} value={y}>{y}</option>
                 ))}
@@ -235,9 +228,9 @@ export const RawDataPage: React.FC = () => {
                 value={dimensionType}
                 onChange={(e) => setDimensionType(e.target.value)}
                 className="text-[12px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] px-2 py-1.5 cursor-pointer max-w-[220px]"
-                aria-label="Filter by disaggregation dimension"
+                aria-label={t('Filter by disaggregation dimension')}
               >
-                <option value="">All dimensions</option>
+                <option value="">{t('All dimensions')}</option>
                 {dimensionTypes.map((d) => (
                   <option key={d} value={d}>{d}</option>
                 ))}
@@ -247,11 +240,11 @@ export const RawDataPage: React.FC = () => {
                 value={valueFilter}
                 onChange={(e) => setValueFilter(e.target.value as ValueFilter)}
                 className="text-[12px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] px-2 py-1.5 cursor-pointer"
-                aria-label="Filter by value type"
+                aria-label={t('Filter by value type')}
               >
-                <option value="all">All value types</option>
-                <option value="numeric">Numeric only</option>
-                <option value="categorical">Categorical only</option>
+                <option value="all">{t('All value types')}</option>
+                <option value="numeric">{t('Numeric only')}</option>
+                <option value="categorical">{t('Categorical only')}</option>
               </select>
 
               {filtersActive && (
@@ -260,14 +253,11 @@ export const RawDataPage: React.FC = () => {
                   onClick={clearFilters}
                   className="inline-flex items-center gap-1 text-[12px] text-[var(--c-muted)] hover:text-[var(--c-danger)] px-2 py-1.5 cursor-pointer"
                 >
-                  <X size={13} />
-                  Clear
-                </button>
+                  <X size={13} /> {t('Clear')} </button>
               )}
 
               <span className="text-[12px] text-[var(--c-muted)] ml-auto font-mono tabular-nums">
-                {sorted.length.toLocaleString()} of {rows.length.toLocaleString()} rows
-              </span>
+                {sorted.length.toLocaleString()} {t('of')} {rows.length.toLocaleString()} {t('rows')} </span>
             </div>
           </div>
 
@@ -281,7 +271,7 @@ export const RawDataPage: React.FC = () => {
                   <SortHeader label="Year" sortBy="year" />
                   <SortHeader label="Dimension" sortBy="dimensionName" />
                   <SortHeader label="Value" sortBy="value" />
-                  <th className="py-2 px-2 font-medium">95% CI</th>
+                  <th className="py-2 px-2 font-medium">{t('95% CI')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--c-border)]">
@@ -298,7 +288,7 @@ export const RawDataPage: React.FC = () => {
                         <ExternalLink size={11} className="shrink-0" />
                       </a>
                     </td>
-                    <td className="py-2 px-2 text-[var(--c-ink)] max-w-[420px]">{r.indicator}</td>
+                    <td className="py-2 px-2 text-[var(--c-ink)] max-w-[420px]">{t(r.indicator)}</td>
                     <td className="py-2 px-2 font-mono tabular-nums text-[var(--c-muted)] whitespace-nowrap">
                       {r.startYear !== r.endYear ? `${r.startYear}–${r.endYear}` : r.year}
                     </td>
@@ -313,7 +303,7 @@ export const RawDataPage: React.FC = () => {
                       {r.value || <span className="text-[var(--c-faint)]">—</span>}
                       {r.numeric === '' && r.value !== '' && (
                         <span className="ml-1.5 align-middle">
-                          <Badge variant="neutral" size="sm">cat</Badge>
+                          <Badge variant="neutral" size="sm">{t('cat')}</Badge>
                         </span>
                       )}
                     </td>
@@ -325,9 +315,7 @@ export const RawDataPage: React.FC = () => {
 
                 {visible.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="py-10 text-center text-[13px] text-[var(--c-muted)]">
-                      No observations match these filters.
-                    </td>
+                    <td colSpan={6} className="py-10 text-center text-[13px] text-[var(--c-muted)]"> {t('No observations match these filters.')} </td>
                   </tr>
                 )}
               </tbody>
@@ -352,9 +340,7 @@ export const RawDataPage: React.FC = () => {
                 disabled={safePage === 0}
                 className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[12px] rounded-[6px] border border-[var(--c-border-strong)] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--c-subtle)] cursor-pointer"
               >
-                <ChevronLeft size={14} />
-                Prev
-              </button>
+                <ChevronLeft size={14} /> {t('Prev')} </button>
               <span className="text-[12px] text-[var(--c-muted)] font-mono tabular-nums">
                 {safePage + 1} / {pageCount.toLocaleString()}
               </span>
@@ -363,20 +349,14 @@ export const RawDataPage: React.FC = () => {
                 onClick={() => setPage(Math.min(pageCount - 1, safePage + 1))}
                 disabled={safePage >= pageCount - 1}
                 className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[12px] rounded-[6px] border border-[var(--c-border-strong)] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--c-subtle)] cursor-pointer"
-              >
-                Next
-                <ChevronRight size={14} />
+              > {t('Next')} <ChevronRight size={14} />
               </button>
             </div>
           </div>
         </div>
       )}
 
-      <p className="text-[11px] text-[var(--c-muted)] leading-relaxed">
-        Every row is shown as retrieved, including the malformed and sentinel values documented on the
-        Dataset &amp; 4 Traps page. Region and country columns are omitted here because the export is
-        filtered to Myanmar (SEAR) throughout.
-      </p>
+      <p className="text-[11px] text-[var(--c-muted)] leading-relaxed"> {t('Every row is shown as retrieved, including the malformed and sentinel values documented on the Dataset & 4 Traps page. Region and country columns are omitted here because the export is filtered to Myanmar (SEAR) throughout.')} </p>
     </div>
   );
 };

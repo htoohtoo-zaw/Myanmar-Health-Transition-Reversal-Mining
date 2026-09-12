@@ -24,8 +24,10 @@ import { Callout } from '../components/Callout';
 import { REVERSAL_ITEMS } from '../data/miningData';
 import { ReversalItem } from '../types';
 import { useTheme } from '../theme/ThemeContext';
+import { useI18n } from '../i18n/LocaleContext';
 
 export const ReversalPage: React.FC = () => {
+  const { t } = useI18n();
   const { colors } = useTheme();
   const [filterVerdict, setFilterVerdict] = useState<string>('All');
   const [selectedItem, setSelectedItem] = useState<ReversalItem | null>(REVERSAL_ITEMS[0]);
@@ -69,12 +71,8 @@ export const ReversalPage: React.FC = () => {
     <div className="space-y-6">
       {/* Title */}
       <div>
-        <h1 className="text-[26px] md:text-[30px] font-bold text-[var(--c-ink)]">
-          Reversal Detection & Structural Breakpoints
-        </h1>
-        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl">
-          Identifying health indicators that achieved sustained historical progress before suffering acute trend reversals or steady post-2020 deteriorations.
-        </p>
+        <h1 className="text-[26px] md:text-[30px] font-bold text-[var(--c-ink)]"> {t('Reversal Detection & Structural Breakpoints')} </h1>
+        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl"> {t('Identifying health indicators that achieved sustained historical progress before suffering acute trend reversals or steady post-2020 deteriorations.')} </p>
       </div>
 
       {/* 1. KPI Row (4 Cards) */}
@@ -110,25 +108,17 @@ export const ReversalPage: React.FC = () => {
 
       {/* Pinned Callouts Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Callout type="danger" title="Tuberculosis Loss of Progress" kicker="REVERSAL FINDING">
-          Tuberculosis incidence reversed after 2020 (338 → 375 per 100k), causing an estimated <strong className="font-bold">12.2 years of progress lost</strong>, returning the national burden to approximately 2011 levels.
-        </Callout>
+        <Callout type="danger" title={t('Tuberculosis Loss of Progress')} kicker="REVERSAL FINDING"> {t('Tuberculosis incidence reversed after 2020 (338 → 375 per 100k), causing an estimated')} <strong className="font-bold">{t('12.2 years of progress lost')}</strong>{t(', returning the national burden to approximately 2011 levels.')} </Callout>
 
-        <Callout type="danger" title="Malaria Resurgence Magnitude" kicker="EPIDEMIOLOGICAL SURGE">
-          Malaria incidence reached an all-time regional elimination low of 1.4 per 1,000 in 2019 before exploding to 12.1 per 1,000 in 2023 — an astonishing <strong className="font-bold">765% increase</strong> over its baseline nadir.
-        </Callout>
+        <Callout type="danger" title={t('Malaria Resurgence Magnitude')} kicker="EPIDEMIOLOGICAL SURGE"> {t('Malaria incidence reached an all-time regional elimination low of 1.4 per 1,000 in 2019 before exploding to 12.1 per 1,000 in 2023 — an astonishing')} <strong className="font-bold">{t('765% increase')}</strong> {t('over its baseline nadir.')} </Callout>
       </div>
 
       {/* 2. Filter Chips & Table Header */}
       <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-5 shadow-[var(--c-shadow-sm)]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <div>
-            <h3 className="text-[16px] font-semibold text-[var(--c-ink)]">
-              Reversal Summary Table (14 Indicators)
-            </h3>
-            <p className="text-[12px] text-[var(--c-muted)]">
-              Click any row below to inspect its detailed historical trajectory and breakpoint drawer
-            </p>
+            <h3 className="text-[16px] font-semibold text-[var(--c-ink)]"> {t('Reversal Summary Table (14 Indicators)')} </h3>
+            <p className="text-[12px] text-[var(--c-muted)]"> {t('Click any row below to inspect its detailed historical trajectory and breakpoint drawer')} </p>
           </div>
 
           {/* Filter Chips */}
@@ -163,7 +153,7 @@ export const ReversalPage: React.FC = () => {
                   className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>Indicator</span>
+                    <span>{t('Indicator')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
@@ -172,7 +162,7 @@ export const ReversalPage: React.FC = () => {
                   className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>Breakpoint</span>
+                    <span>{t('Breakpoint')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
@@ -181,7 +171,7 @@ export const ReversalPage: React.FC = () => {
                   className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>Best Year (Val)</span>
+                    <span>{t('Best Year (Val)')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
@@ -190,7 +180,7 @@ export const ReversalPage: React.FC = () => {
                   className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>% Worse vs Best</span>
+                    <span>{t('% Worse vs Best')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
@@ -199,7 +189,7 @@ export const ReversalPage: React.FC = () => {
                   className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>Verdict Status</span>
+                    <span>{t('Verdict Status')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
@@ -208,7 +198,7 @@ export const ReversalPage: React.FC = () => {
                   className="py-2.5 px-3 font-medium cursor-pointer hover:text-[var(--c-primary)]"
                 >
                   <div className="flex items-center gap-1">
-                    <span>Years Lost</span>
+                    <span>{t('Years Lost')}</span>
                     <ArrowUpDown size={13} />
                   </div>
                 </th>
@@ -228,8 +218,8 @@ export const ReversalPage: React.FC = () => {
                     }`}
                   >
                     <td className="py-2.5 px-3">
-                      <div className="font-semibold text-[var(--c-ink)]">{item.indicator}</div>
-                      <div className="text-[11px] text-[var(--c-muted)]">{item.domain}</div>
+                      <div className="font-semibold text-[var(--c-ink)]">{t(item.indicator)}</div>
+                      <div className="text-[11px] text-[var(--c-muted)]">{t(item.domain)}</div>
                     </td>
                     <td className="py-2.5 px-3 font-mono text-[var(--c-ink)]">
                       {item.breakpointYear}
@@ -256,12 +246,12 @@ export const ReversalPage: React.FC = () => {
                             : 'success'
                         }
                       >
-                        {item.verdict}
+                        {t(item.verdict)}
                       </Badge>
                     </td>
                     <td className="py-2.5 px-3 font-mono font-bold text-[var(--c-ink)]">
                       {typeof item.yearsLost === 'number' && item.yearsLost > 0 ? (
-                        <span className="text-[var(--c-danger)]">~{item.yearsLost} yrs</span>
+                        <span className="text-[var(--c-danger)]">~{item.yearsLost} {t('yrs')}</span>
                       ) : (
                         <span className="text-[var(--c-muted)]">0</span>
                       )}
@@ -280,9 +270,7 @@ export const ReversalPage: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-3 border-b border-[var(--c-border)]">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--c-primary)]">
-                  SELECTED INDICATOR TRAJECTORY
-                </span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--c-primary)]"> {t('SELECTED INDICATOR TRAJECTORY')} </span>
                 <Badge
                   variant={
                     selectedItem.verdict === 'Reversal'
@@ -292,24 +280,24 @@ export const ReversalPage: React.FC = () => {
                       : 'success'
                   }
                 >
-                  {selectedItem.verdict}
+                  {t(selectedItem.verdict)}
                 </Badge>
               </div>
               <h3 className="text-[18px] font-bold text-[var(--c-ink)] mt-0.5">
-                {selectedItem.indicator}
+                {t(selectedItem.indicator)}
               </h3>
             </div>
             <div className="flex items-center gap-4 text-[13px]">
               <div>
-                <span className="text-[var(--c-muted)]">Best Year: </span>
+                <span className="text-[var(--c-muted)]">{t('Best Year:')} </span>
                 <strong className="text-[var(--c-ink)] font-mono">{selectedItem.bestYear}</strong>
               </div>
               <div>
-                <span className="text-[var(--c-muted)]">Breakpoint: </span>
+                <span className="text-[var(--c-muted)]">{t('Breakpoint:')} </span>
                 <strong className="text-[var(--c-danger)] font-mono">{selectedItem.breakpointYear}</strong>
               </div>
               <div>
-                <span className="text-[var(--c-muted)]">Years Lost: </span>
+                <span className="text-[var(--c-muted)]">{t('Years Lost:')} </span>
                 <strong className="text-[var(--c-danger)] font-mono">
                   {selectedItem.yearsLost > 0 ? `~${selectedItem.yearsLost} yrs` : 'None'}
                 </strong>
@@ -370,25 +358,23 @@ export const ReversalPage: React.FC = () => {
 
             <div className="bg-[var(--c-subtle)]/60 p-4 rounded-[8px] border border-[var(--c-border-strong)] flex flex-col justify-between">
               <div>
-                <h4 className="text-[13px] font-bold text-[var(--c-ink)] mb-1.5">
-                  Analytical Narrative
-                </h4>
+                <h4 className="text-[13px] font-bold text-[var(--c-ink)] mb-1.5"> {t('Analytical Narrative')} </h4>
                 <p className="text-[12px] text-[var(--c-ink)] leading-relaxed">
-                  {selectedItem.description}
+                  {t(selectedItem.description)}
                 </p>
               </div>
 
               <div className="mt-4 pt-3 border-t border-[var(--c-border-strong)] space-y-1.5 text-[12px]">
                 <div className="flex justify-between">
-                  <span className="text-[var(--c-muted)]">Domain Category:</span>
-                  <span className="font-semibold text-[var(--c-ink)]">{selectedItem.domain}</span>
+                  <span className="text-[var(--c-muted)]">{t('Domain Category:')}</span>
+                  <span className="font-semibold text-[var(--c-ink)]">{t(selectedItem.domain)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[var(--c-muted)]">Best Value Recorded:</span>
+                  <span className="text-[var(--c-muted)]">{t('Best Value Recorded:')}</span>
                   <span className="font-mono text-[var(--c-success)] font-bold">{selectedItem.bestValue}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[var(--c-muted)]">Current Observation:</span>
+                  <span className="text-[var(--c-muted)]">{t('Current Observation:')}</span>
                   <span className="font-mono text-[var(--c-ink)] font-bold">{selectedItem.currentValue}</span>
                 </div>
               </div>
