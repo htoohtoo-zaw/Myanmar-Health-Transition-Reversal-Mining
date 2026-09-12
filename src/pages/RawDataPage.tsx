@@ -133,13 +133,13 @@ export const RawDataPage: React.FC = () => {
       <button
         type="button"
         onClick={() => toggleSort(sortBy)}
-        className="inline-flex items-center gap-1 hover:text-[#1C4BBC] cursor-pointer"
+        className="inline-flex items-center gap-1 hover:text-[var(--c-primary)] cursor-pointer"
         aria-label={`Sort by ${label}`}
       >
         {label}
         <ArrowUpDown
           size={12}
-          className={sortKey === sortBy ? 'text-[#1C4BBC]' : 'text-[#919398]'}
+          className={sortKey === sortBy ? 'text-[var(--c-primary)]' : 'text-[var(--c-faint)]'}
         />
       </button>
     </th>
@@ -148,50 +148,50 @@ export const RawDataPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-[26px] md:text-[30px] font-bold text-[#0B0F19]">
+        <h1 className="text-[26px] md:text-[30px] font-bold text-[var(--c-ink)]">
           Raw Data Explorer
         </h1>
-        <p className="text-[14px] text-[#60636A] mt-1 max-w-4xl">
+        <p className="text-[14px] text-[var(--c-muted)] mt-1 max-w-4xl">
           Browse the complete WHO Global Health Observatory export for Myanmar exactly as retrieved —
           every observation behind the analyses on this site, before any cleansing was applied.
         </p>
       </div>
 
       {error && (
-        <div className="bg-[#FDF0EF] border border-[#F4C5C2] rounded-[8px] p-4 flex items-start gap-3">
-          <AlertTriangle size={18} className="text-[#C4453F] mt-0.5 shrink-0" />
+        <div className="bg-[var(--c-danger-bg)] border border-[var(--c-danger-border)] rounded-[8px] p-4 flex items-start gap-3">
+          <AlertTriangle size={18} className="text-[var(--c-danger)] mt-0.5 shrink-0" />
           <div>
-            <h4 className="text-[14px] font-semibold text-[#C4453F]">Could not load the dataset</h4>
-            <p className="text-[13px] text-[#0B0F19] mt-0.5">{error}</p>
+            <h4 className="text-[14px] font-semibold text-[var(--c-danger)]">Could not load the dataset</h4>
+            <p className="text-[13px] text-[var(--c-ink)] mt-0.5">{error}</p>
           </div>
         </div>
       )}
 
       {!rows && !error && (
-        <div className="bg-white border border-[#E4E9F2] rounded-[8px] p-10 flex flex-col items-center justify-center gap-3">
-          <Loader2 size={22} className="text-[#1C4BBC] animate-spin" />
-          <p className="text-[13px] text-[#60636A]">
+        <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] p-10 flex flex-col items-center justify-center gap-3">
+          <Loader2 size={22} className="text-[var(--c-primary)] animate-spin" />
+          <p className="text-[13px] text-[var(--c-muted)]">
             Loading 20,613 observations (6.5 MB)…
           </p>
         </div>
       )}
 
       {rows && (
-        <div className="bg-white border border-[#E4E9F2] rounded-[8px] shadow-[0_1px_2px_rgba(11,15,25,0.06)]">
+        <div className="bg-[var(--c-surface)] border border-[var(--c-border)] rounded-[8px] shadow-[var(--c-shadow-sm)]">
           {/* Controls */}
-          <div className="p-4 border-b border-[#E4E9F2] space-y-3">
+          <div className="p-4 border-b border-[var(--c-border)] space-y-3">
             <div className="flex flex-col lg:flex-row lg:items-center gap-3">
               <div className="relative flex-1 min-w-0">
                 <Search
                   size={15}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[#919398] pointer-events-none"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--c-faint)] pointer-events-none"
                 />
                 <input
                   type="search"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search indicator, GHO code, dimension or value…"
-                  className="w-full pl-9 pr-3 py-2 text-[13px] rounded-[6px] border border-[#CAD3E6] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#1C4BBC]"
+                  className="w-full pl-9 pr-3 py-2 text-[13px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] focus:outline-hidden focus:ring-1 focus:ring-[var(--c-primary)]"
                   aria-label="Search the dataset"
                 />
               </div>
@@ -199,7 +199,7 @@ export const RawDataPage: React.FC = () => {
               <a
                 href={RAW_DATASET_PATH}
                 download
-                className="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-[6px] bg-[#1C4BBC] text-white text-[13px] font-medium shrink-0 hover:bg-[#163C96] transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-[6px] bg-[var(--c-primary)] text-white text-[13px] font-medium shrink-0 hover:bg-[var(--c-primary-hover)] transition-colors"
               >
                 <Download size={15} strokeWidth={2} />
                 Download CSV
@@ -210,7 +210,7 @@ export const RawDataPage: React.FC = () => {
               <select
                 value={yearFrom}
                 onChange={(e) => setYearFrom(e.target.value === '' ? '' : Number(e.target.value))}
-                className="text-[12px] rounded-[6px] border border-[#CAD3E6] bg-white px-2 py-1.5 cursor-pointer"
+                className="text-[12px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] px-2 py-1.5 cursor-pointer"
                 aria-label="Filter from year"
               >
                 <option value="">Year from…</option>
@@ -222,7 +222,7 @@ export const RawDataPage: React.FC = () => {
               <select
                 value={yearTo}
                 onChange={(e) => setYearTo(e.target.value === '' ? '' : Number(e.target.value))}
-                className="text-[12px] rounded-[6px] border border-[#CAD3E6] bg-white px-2 py-1.5 cursor-pointer"
+                className="text-[12px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] px-2 py-1.5 cursor-pointer"
                 aria-label="Filter to year"
               >
                 <option value="">Year to…</option>
@@ -234,7 +234,7 @@ export const RawDataPage: React.FC = () => {
               <select
                 value={dimensionType}
                 onChange={(e) => setDimensionType(e.target.value)}
-                className="text-[12px] rounded-[6px] border border-[#CAD3E6] bg-white px-2 py-1.5 cursor-pointer max-w-[220px]"
+                className="text-[12px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] px-2 py-1.5 cursor-pointer max-w-[220px]"
                 aria-label="Filter by disaggregation dimension"
               >
                 <option value="">All dimensions</option>
@@ -246,7 +246,7 @@ export const RawDataPage: React.FC = () => {
               <select
                 value={valueFilter}
                 onChange={(e) => setValueFilter(e.target.value as ValueFilter)}
-                className="text-[12px] rounded-[6px] border border-[#CAD3E6] bg-white px-2 py-1.5 cursor-pointer"
+                className="text-[12px] rounded-[6px] border border-[var(--c-border-strong)] bg-[var(--c-surface)] px-2 py-1.5 cursor-pointer"
                 aria-label="Filter by value type"
               >
                 <option value="all">All value types</option>
@@ -258,14 +258,14 @@ export const RawDataPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="inline-flex items-center gap-1 text-[12px] text-[#60636A] hover:text-[#C4453F] px-2 py-1.5 cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[12px] text-[var(--c-muted)] hover:text-[var(--c-danger)] px-2 py-1.5 cursor-pointer"
                 >
                   <X size={13} />
                   Clear
                 </button>
               )}
 
-              <span className="text-[12px] text-[#60636A] ml-auto font-mono tabular-nums">
+              <span className="text-[12px] text-[var(--c-muted)] ml-auto font-mono tabular-nums">
                 {sorted.length.toLocaleString()} of {rows.length.toLocaleString()} rows
               </span>
             </div>
@@ -275,7 +275,7 @@ export const RawDataPage: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-[12.5px]">
               <thead>
-                <tr className="border-b border-[#E4E9F2] text-[#60636A] bg-[#F6F8FC]">
+                <tr className="border-b border-[var(--c-border)] text-[var(--c-muted)] bg-[var(--c-surface-2)]">
                   <SortHeader label="GHO Code" sortBy="code" />
                   <SortHeader label="Indicator" sortBy="indicator" className="min-w-[260px]" />
                   <SortHeader label="Year" sortBy="year" />
@@ -284,40 +284,40 @@ export const RawDataPage: React.FC = () => {
                   <th className="py-2 px-2 font-medium">95% CI</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#E4E9F2]">
+              <tbody className="divide-y divide-[var(--c-border)]">
                 {visible.map((r, i) => (
-                  <tr key={`${r.code}-${r.year}-${safePage}-${i}`} className="hover:bg-[#EDF1FA]/40 align-top">
+                  <tr key={`${r.code}-${r.year}-${safePage}-${i}`} className="hover:bg-[var(--c-subtle)]/40 align-top">
                     <td className="py-2 px-2 whitespace-nowrap">
                       <a
                         href={r.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-mono text-[11.5px] text-[#1C4BBC] hover:underline"
+                        className="inline-flex items-center gap-1 font-mono text-[11.5px] text-[var(--c-primary)] hover:underline"
                       >
                         {r.code}
                         <ExternalLink size={11} className="shrink-0" />
                       </a>
                     </td>
-                    <td className="py-2 px-2 text-[#0B0F19] max-w-[420px]">{r.indicator}</td>
-                    <td className="py-2 px-2 font-mono tabular-nums text-[#60636A] whitespace-nowrap">
+                    <td className="py-2 px-2 text-[var(--c-ink)] max-w-[420px]">{r.indicator}</td>
+                    <td className="py-2 px-2 font-mono tabular-nums text-[var(--c-muted)] whitespace-nowrap">
                       {r.startYear !== r.endYear ? `${r.startYear}–${r.endYear}` : r.year}
                     </td>
-                    <td className="py-2 px-2 text-[#60636A]">
+                    <td className="py-2 px-2 text-[var(--c-muted)]">
                       {r.dimensionName ? (
                         <span title={r.dimensionType}>{r.dimensionName}</span>
                       ) : (
-                        <span className="text-[#919398]">—</span>
+                        <span className="text-[var(--c-faint)]">—</span>
                       )}
                     </td>
-                    <td className="py-2 px-2 font-medium text-[#0B0F19]">
-                      {r.value || <span className="text-[#919398]">—</span>}
+                    <td className="py-2 px-2 font-medium text-[var(--c-ink)]">
+                      {r.value || <span className="text-[var(--c-faint)]">—</span>}
                       {r.numeric === '' && r.value !== '' && (
                         <span className="ml-1.5 align-middle">
                           <Badge variant="neutral" size="sm">cat</Badge>
                         </span>
                       )}
                     </td>
-                    <td className="py-2 px-2 font-mono tabular-nums text-[#60636A] whitespace-nowrap">
+                    <td className="py-2 px-2 font-mono tabular-nums text-[var(--c-muted)] whitespace-nowrap">
                       {r.low !== '' || r.high !== '' ? `${r.low || '?'} – ${r.high || '?'}` : '—'}
                     </td>
                   </tr>
@@ -325,7 +325,7 @@ export const RawDataPage: React.FC = () => {
 
                 {visible.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="py-10 text-center text-[13px] text-[#60636A]">
+                    <td colSpan={6} className="py-10 text-center text-[13px] text-[var(--c-muted)]">
                       No observations match these filters.
                     </td>
                   </tr>
@@ -335,8 +335,8 @@ export const RawDataPage: React.FC = () => {
           </div>
 
           {/* Pagination */}
-          <div className="p-3 border-t border-[#E4E9F2] flex items-center justify-between gap-3">
-            <span className="text-[12px] text-[#60636A] font-mono tabular-nums">
+          <div className="p-3 border-t border-[var(--c-border)] flex items-center justify-between gap-3">
+            <span className="text-[12px] text-[var(--c-muted)] font-mono tabular-nums">
               {sorted.length === 0
                 ? '0 rows'
                 : `${(safePage * PAGE_SIZE + 1).toLocaleString()}–${Math.min(
@@ -350,19 +350,19 @@ export const RawDataPage: React.FC = () => {
                 type="button"
                 onClick={() => setPage(Math.max(0, safePage - 1))}
                 disabled={safePage === 0}
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[12px] rounded-[6px] border border-[#CAD3E6] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#EDF1FA] cursor-pointer"
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[12px] rounded-[6px] border border-[var(--c-border-strong)] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--c-subtle)] cursor-pointer"
               >
                 <ChevronLeft size={14} />
                 Prev
               </button>
-              <span className="text-[12px] text-[#60636A] font-mono tabular-nums">
+              <span className="text-[12px] text-[var(--c-muted)] font-mono tabular-nums">
                 {safePage + 1} / {pageCount.toLocaleString()}
               </span>
               <button
                 type="button"
                 onClick={() => setPage(Math.min(pageCount - 1, safePage + 1))}
                 disabled={safePage >= pageCount - 1}
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[12px] rounded-[6px] border border-[#CAD3E6] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#EDF1FA] cursor-pointer"
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[12px] rounded-[6px] border border-[var(--c-border-strong)] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--c-subtle)] cursor-pointer"
               >
                 Next
                 <ChevronRight size={14} />
@@ -372,7 +372,7 @@ export const RawDataPage: React.FC = () => {
         </div>
       )}
 
-      <p className="text-[11px] text-[#60636A] leading-relaxed">
+      <p className="text-[11px] text-[var(--c-muted)] leading-relaxed">
         Every row is shown as retrieved, including the malformed and sentinel values documented on the
         Dataset &amp; 4 Traps page. Region and country columns are omitted here because the export is
         filtered to Myanmar (SEAR) throughout.

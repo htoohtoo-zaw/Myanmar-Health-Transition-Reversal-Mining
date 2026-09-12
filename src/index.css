@@ -1,10 +1,126 @@
 @import "tailwindcss";
 
+/**
+ * Theme tokens.
+ *
+ * Every colour in the UI resolves through one of these variables so the two
+ * themes stay in step. The light values are the palette the dashboard was
+ * originally built with; the dark values are their counterparts, chosen to
+ * hold the same contrast relationships rather than merely inverted.
+ *
+ * The JS mirror in src/theme/palette.ts must be kept in sync — chart libraries
+ * set SVG presentation attributes, which cannot resolve var().
+ */
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --c-app: #EDF1FA;         /* page background */
+  --c-surface: #FFFFFF;     /* cards, tables, bars */
+  --c-surface-2: #F6F8FC;   /* table headers, insets */
+  --c-subtle: #EDF1FA;      /* hover fills, quiet chips */
+  --c-subtle-2: #DDE4F5;    /* primary-tinted chip fill */
+
+  /* Text */
+  --c-ink: #0B0F19;         /* primary text */
+  --c-muted: #60636A;       /* secondary text */
+  --c-faint: #919398;       /* placeholder, disabled */
+  --c-on-accent: #FFFFFF;   /* text on filled accent buttons */
+
+  /* Lines */
+  --c-border: #E4E9F2;
+  --c-border-strong: #CAD3E6;
+
+  /* Accent */
+  --c-primary: #1C4BBC;
+  --c-primary-strong: #17398B;
+  --c-primary-hover: #163C96;
+
+  /* Status */
+  --c-success: #2F9E68;
+  --c-success-strong: #278657;
+  --c-success-bg: #EBF7F0;
+  --c-success-border: #BBE5D0;
+
+  --c-warning: #C68A1E;
+  --c-warning-strong: #A87418;
+  --c-warning-bg: #FCF5E8;
+  --c-warning-border: #F2DEB0;
+
+  --c-danger: #C4453F;
+  --c-danger-strong: #A73934;
+  --c-danger-bg: #FDF0EF;
+  --c-danger-border: #F4C5C2;
+
+  /* Elevation */
+  --c-shadow-sm: 0 1px 2px rgba(11, 15, 25, 0.06);
+  --c-shadow-md: 0 4px 12px rgba(28, 75, 188, 0.08);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --c-app: #0E1219;
+  --c-surface: #161B25;
+  --c-surface-2: #1B2130;
+  --c-subtle: #1F2635;
+  --c-subtle-2: #22304F;
+
+  --c-ink: #E9EDF5;
+  --c-muted: #A0A8B6;
+  --c-faint: #737B8A;
+  --c-on-accent: #FFFFFF;
+
+  --c-border: #262E3D;
+  --c-border-strong: #34405480;
+
+  /* Accents lift in lightness so they clear WCAG AA on the dark surfaces. */
+  --c-primary: #7BA0EE;
+  --c-primary-strong: #9BB8F4;
+  --c-primary-hover: #94B2F2;
+
+  --c-success: #55C48D;
+  --c-success-strong: #77D7AA;
+  --c-success-bg: #12291F;
+  --c-success-border: #245340;
+
+  --c-warning: #E3AE45;
+  --c-warning-strong: #F1C468;
+  --c-warning-bg: #2A2214;
+  --c-warning-border: #4E4022;
+
+  --c-danger: #ED7A73;
+  --c-danger-strong: #F49892;
+  --c-danger-bg: #2C1918;
+  --c-danger-border: #562C2A;
+
+  --c-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --c-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
 @layer base {
   body {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #0B0F19;
-    background-color: #EDF1FA;
+    color: var(--c-ink);
+    background-color: var(--c-app);
+  }
+
+  /* Burmese needs a font with Myanmar coverage; Poppins has none, so the
+     browser would otherwise fall back to an arbitrary system face. */
+  :root[lang="my"] body,
+  :root[lang="my"] input,
+  :root[lang="my"] select,
+  :root[lang="my"] button,
+  :root[lang="my"] textarea {
+    font-family: 'Padauk', 'Noto Sans Myanmar', 'Myanmar Text', 'Poppins',
+      -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* Burmese glyphs carry tall stacked diacritics that clip at Latin line
+     heights. */
+  :root[lang="my"] body {
+    line-height: 1.75;
   }
 }
 

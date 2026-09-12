@@ -16,27 +16,27 @@ export const Callout: React.FC<CalloutProps> = ({
 }) => {
   const styles = {
     info: {
-      bg: 'bg-[#EDF1FA]',
-      border: 'border-l-4 border-l-[#1C4BBC] border-[#CAD3E6]',
-      title: 'text-[#1C4BBC]',
+      bg: 'bg-[var(--c-subtle)]',
+      border: 'border-l-4 border-l-[var(--c-primary)] border-[var(--c-border-strong)]',
+      title: 'text-[var(--c-primary)]',
       icon: Info,
     },
     warning: {
-      bg: 'bg-[#FCF5E8]',
-      border: 'border-l-4 border-l-[#C68A1E] border-[#F2DEB0]',
-      title: 'text-[#C68A1E]',
+      bg: 'bg-[var(--c-warning-bg)]',
+      border: 'border-l-4 border-l-[var(--c-warning)] border-[var(--c-warning-border)]',
+      title: 'text-[var(--c-warning)]',
       icon: AlertTriangle,
     },
     danger: {
-      bg: 'bg-[#FDF0EF]',
-      border: 'border-l-4 border-l-[#C4453F] border-[#F4C5C2]',
-      title: 'text-[#C4453F]',
+      bg: 'bg-[var(--c-danger-bg)]',
+      border: 'border-l-4 border-l-[var(--c-danger)] border-[var(--c-danger-border)]',
+      title: 'text-[var(--c-danger)]',
       icon: AlertCircle,
     },
     success: {
-      bg: 'bg-[#EBF7F0]',
-      border: 'border-l-4 border-l-[#2F9E68] border-[#BBE5D0]',
-      title: 'text-[#2F9E68]',
+      bg: 'bg-[var(--c-success-bg)]',
+      border: 'border-l-4 border-l-[var(--c-success)] border-[var(--c-success-border)]',
+      title: 'text-[var(--c-success)]',
       icon: CheckCircle2,
     },
   }[type];
@@ -45,7 +45,7 @@ export const Callout: React.FC<CalloutProps> = ({
 
   return (
     <div
-      className={`rounded-[8px] border p-4 ${styles.bg} ${styles.border} shadow-[0_1px_2px_rgba(11,15,25,0.06)]`}
+      className={`rounded-[8px] border p-4 ${styles.bg} ${styles.border} shadow-[var(--c-shadow-sm)]`}
     >
       <div className="flex items-start gap-3">
         <IconComponent
@@ -55,14 +55,14 @@ export const Callout: React.FC<CalloutProps> = ({
         />
         <div className="flex-1 min-w-0">
           {kicker && (
-            <div className="text-[11px] font-semibold uppercase tracking-wider text-[#60636A] mb-0.5">
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-[var(--c-muted)] mb-0.5">
               {kicker}
             </div>
           )}
           <h4 className={`text-[14px] font-semibold ${styles.title} mb-1`}>
             {title}
           </h4>
-          <div className="text-[13px] text-[#0B0F19] leading-relaxed">
+          <div className="text-[13px] text-[var(--c-ink)] leading-relaxed">
             {children}
           </div>
         </div>
